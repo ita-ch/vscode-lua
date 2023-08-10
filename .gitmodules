@@ -1,6 +1,6 @@
 [submodule "server"]
 	path = server
-	url = https://github.com/LuaLS/lua-language-server
+	url = https://github.com/ita-ch/lua-language-server.git
 [submodule "client/3rd/vscode-lua-doc"]
 	path = client/3rd/vscode-lua-doc
 	url = https://github.com/LuaLS/vscode-lua-doc
