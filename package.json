@@ -4,7 +4,7 @@
 		"onWebviewPanel:lua-doc",
 		"onCommand:extension.lua.doc"
 	],
-	"author": "sumneko",
+	"author": "sumneko_infotech",
 	"capabilities": {
 		"untrustedWorkspaces": {
 			"description": "",
@@ -3290,7 +3290,7 @@
 			}
 		]
 	},
-	"description": "Lua Language Server coded by Lua",
+	"description": "Lua Language Server coded by Lua (Infotech Version)",
 	"displayName": "Lua",
 	"engines": {
 		"vscode": "^1.67.0"
@@ -3304,13 +3304,13 @@
 	"license": "MIT",
 	"main": "./client/out/extension",
 	"name": "lua",
-	"publisher": "sumneko",
+	"publisher": "sumneko_infotech",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/LuaLS/lua-language-server"
+		"url": "https://github.com/ita-ch/vscode-lua"
 	},
 	"sponsor": {
 		"url": "https://github.com/LuaLS/lua-language-server/issues/484"
 	},
-	"version": "3.6.26"
+	"version": "3.6.26-ita-1"
 }
