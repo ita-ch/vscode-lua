@@ -10,6 +10,7 @@
 			"description": "",
 			"restrictedConfigurations": [
 				"Lua.runtime.plugin",
+				"Lua.misc.executablePath",
 				"Lua.misc.parameters"
 			],
 			"supported": "limited"
@@ -37,6 +38,14 @@
 			{
 				"command": "lua.reloadFFIMeta",
 				"title": "%command.reloadFFIMeta%"
+			},
+			{
+				"command": "lua.startServer",
+				"title": "%command.startServer%"
+			},
+			{
+				"command": "lua.stopServer",
+				"title": "%command.stopServer%"
 			}
 		],
 		"configuration": {
@@ -46,6 +55,24 @@
 					"markdownDescription": "%config.addonManager.enable%",
 					"scope": "resource",
 					"type": "boolean"
+				},
+				"Lua.addonManager.repositoryBranch": {
+					"default": "",
+					"markdownDescription": "%config.addonManager.repositoryBranch%",
+					"scope": "resource",
+					"type": "string"
+				},
+				"Lua.addonManager.repositoryPath": {
+					"default": "",
+					"markdownDescription": "%config.addonManager.repositoryPath%",
+					"scope": "resource",
+					"type": "string"
+				},
+				"Lua.addonRepositoryPath": {
+					"default": "",
+					"markdownDescription": "%config.addonRepositoryPath%",
+					"scope": "resource",
+					"type": "string"
 				},
 				"Lua.codeLens.enable": {
 					"default": false,
@@ -103,6 +130,12 @@
 					"scope": "resource",
 					"type": "string"
 				},
+				"Lua.completion.maxSuggestCount": {
+					"default": 100,
+					"markdownDescription": "%config.completion.maxSuggestCount%",
+					"scope": "resource",
+					"type": "integer"
+				},
 				"Lua.completion.postfix": {
 					"default": "@",
 					"markdownDescription": "%config.completion.postfix%",
@@ -151,6 +184,7 @@
 							"ambiguity-1",
 							"ambiguous-syntax",
 							"args-after-dots",
+							"assign-const-global",
 							"assign-type-mismatch",
 							"await-in-sync",
 							"block-after-else",
@@ -172,6 +206,7 @@
 							"duplicate-index",
 							"duplicate-set-field",
 							"empty-block",
+							"env-is-global",
 							"err-assign-as-eq",
 							"err-c-long-comment",
 							"err-comment-prefix",
@@ -181,6 +216,7 @@
 							"err-nonstandard-symbol",
 							"err-then-as-do",
 							"exp-in-action",
+							"global-close-attribute",
 							"global-element",
 							"global-in-nil-env",
 							"incomplete-signature-doc",
@@ -235,6 +271,7 @@
 							"missing-parameter",
 							"missing-return",
 							"missing-return-value",
+							"multi-close",
 							"name-style-check",
 							"need-check-nil",
 							"need-paren",
@@ -264,6 +301,7 @@
 							"undefined-global",
 							"unexpect-dots",
 							"unexpect-efunc-name",
+							"unexpect-gfunc-name",
 							"unexpect-lfunc-name",
 							"unexpect-symbol",
 							"unicode-name",
@@ -273,26 +311,17 @@
 							"unknown-operator",
 							"unknown-symbol",
 							"unreachable-code",
+							"unsupport-named-vararg",
 							"unsupport-symbol",
 							"unused-function",
 							"unused-label",
 							"unused-local",
-							"unused-vararg"
+							"unused-vararg",
+							"variable-not-declared"
 						],
 						"type": "string"
 					},
 					"markdownDescription": "%config.diagnostics.disable%",
-					"scope": "resource",
-					"type": "array"
-				},
-				"Lua.diagnostics.disableScheme": {
-					"default": [
-						"git"
-					],
-					"items": {
-						"type": "string"
-					},
-					"markdownDescription": "%config.diagnostics.disableScheme%",
 					"scope": "resource",
 					"type": "array"
 				},
@@ -302,12 +331,32 @@
 					"scope": "resource",
 					"type": "boolean"
 				},
+				"Lua.diagnostics.enableScheme": {
+					"default": [
+						"file"
+					],
+					"items": {
+						"type": "string"
+					},
+					"markdownDescription": "%config.diagnostics.enableScheme%",
+					"scope": "resource",
+					"type": "array"
+				},
 				"Lua.diagnostics.globals": {
 					"default": [],
 					"items": {
 						"type": "string"
 					},
 					"markdownDescription": "%config.diagnostics.globals%",
+					"scope": "resource",
+					"type": "array"
+				},
+				"Lua.diagnostics.globalsRegex": {
+					"default": [],
+					"items": {
+						"type": "string"
+					},
+					"markdownDescription": "%config.diagnostics.globalsRegex%",
 					"scope": "resource",
 					"type": "array"
 				},
@@ -2478,6 +2527,26 @@
 					"scope": "resource",
 					"type": "array"
 				},
+				"Lua.doc.regengine": {
+					"default": "glob",
+					"enum": [
+						"glob",
+						"lua"
+					],
+					"markdownDescription": "%config.doc.regengine%",
+					"markdownEnumDescriptions": [
+						"%config.doc.regengine.glob%",
+						"%config.doc.regengine.lua%"
+					],
+					"scope": "resource",
+					"type": "string"
+				},
+				"Lua.docScriptPath": {
+					"default": "",
+					"markdownDescription": "%config.docScriptPath%",
+					"scope": "resource",
+					"type": "string"
+				},
 				"Lua.format.defaultConfig": {
 					"additionalProperties": false,
 					"default": {},
@@ -2517,6 +2586,12 @@
 				"Lua.hint.await": {
 					"default": true,
 					"markdownDescription": "%config.hint.await%",
+					"scope": "resource",
+					"type": "boolean"
+				},
+				"Lua.hint.awaitPropagate": {
+					"default": false,
+					"markdownDescription": "%config.hint.awaitPropagate%",
 					"scope": "resource",
 					"type": "boolean"
 				},
@@ -2589,7 +2664,7 @@
 					"type": "boolean"
 				},
 				"Lua.hover.previewFields": {
-					"default": 50,
+					"default": 10,
 					"markdownDescription": "%config.hover.previewFields%",
 					"scope": "resource",
 					"type": "integer"
@@ -2611,6 +2686,18 @@
 					"markdownDescription": "%config.hover.viewStringMax%",
 					"scope": "resource",
 					"type": "integer"
+				},
+				"Lua.language.completeAnnotation": {
+					"default": true,
+					"markdownDescription": "%config.language.completeAnnotation%",
+					"scope": "resource",
+					"type": "boolean"
+				},
+				"Lua.language.fixIndent": {
+					"default": true,
+					"markdownDescription": "%config.language.fixIndent%",
+					"scope": "resource",
+					"type": "boolean"
 				},
 				"Lua.misc.executablePath": {
 					"default": "",
@@ -2898,7 +2985,8 @@
 							"&&",
 							"!",
 							"!=",
-							"continue"
+							"continue",
+							"|lambda|"
 						],
 						"type": "string"
 					},
@@ -2925,19 +3013,20 @@
 					"type": "boolean"
 				},
 				"Lua.runtime.plugin": {
-					"default": "",
 					"markdownDescription": "%config.runtime.plugin%",
 					"scope": "resource",
-					"type": "string"
+					"type": [
+						"string",
+						"array"
+					]
 				},
 				"Lua.runtime.pluginArgs": {
-					"default": [],
-					"items": {
-						"type": "string"
-					},
 					"markdownDescription": "%config.runtime.pluginArgs%",
 					"scope": "resource",
-					"type": "array"
+					"type": [
+						"array",
+						"object"
+					]
 				},
 				"Lua.runtime.special": {
 					"additionalProperties": false,
@@ -2981,6 +3070,7 @@
 						"Lua 5.2",
 						"Lua 5.3",
 						"Lua 5.4",
+						"Lua 5.5",
 						"LuaJIT"
 					],
 					"markdownDescription": "%config.runtime.version%",
@@ -2989,6 +3079,7 @@
 						"%config.runtime.version.Lua 5.2%",
 						"%config.runtime.version.Lua 5.3%",
 						"%config.runtime.version.Lua 5.4%",
+						"%config.runtime.version.Lua 5.5%",
 						"%config.runtime.version.LuaJIT%"
 					],
 					"scope": "resource",
@@ -3039,6 +3130,30 @@
 					"scope": "resource",
 					"type": "boolean"
 				},
+				"Lua.type.checkTableShape": {
+					"default": false,
+					"markdownDescription": "%config.type.checkTableShape%",
+					"scope": "resource",
+					"type": "boolean"
+				},
+				"Lua.type.inferParamType": {
+					"default": false,
+					"markdownDescription": "%config.type.inferParamType%",
+					"scope": "resource",
+					"type": "boolean"
+				},
+				"Lua.type.inferTableSize": {
+					"default": 10,
+					"markdownDescription": "%config.type.inferTableSize%",
+					"scope": "resource",
+					"type": "integer"
+				},
+				"Lua.type.maxUnionVariants": {
+					"default": 0,
+					"markdownDescription": "%config.type.maxUnionVariants%",
+					"scope": "resource",
+					"type": "integer"
+				},
 				"Lua.type.weakNilCheck": {
 					"default": false,
 					"markdownDescription": "%config.type.weakNilCheck%",
@@ -3088,10 +3203,12 @@
 					"type": "boolean"
 				},
 				"Lua.workspace.checkThirdParty": {
-					"default": true,
 					"markdownDescription": "%config.workspace.checkThirdParty%",
 					"scope": "resource",
-					"type": "boolean"
+					"type": [
+						"string",
+						"boolean"
+					]
 				},
 				"Lua.workspace.ignoreDir": {
 					"default": [
@@ -3170,6 +3287,15 @@
 			}
 		],
 		"languages": [
+			{
+				"aliases": [
+					"Lua"
+				],
+				"extensions": [
+					".lua"
+				],
+				"id": "lua"
+			},
 			{
 				"filenames": [
 					".luarc.json",
@@ -3322,7 +3448,7 @@
 	"description": "Lua Language Server coded by Lua (Infotech Version)",
 	"displayName": "Lua",
 	"engines": {
-		"vscode": "^1.67.0"
+		"vscode": "^1.86.0"
 	},
 	"icon": "images/logo.png",
 	"keywords": [
@@ -3331,7 +3457,7 @@
 		"EmmyLua"
 	],
 	"license": "MIT",
-	"main": "./client/out/extension",
+	"main": "./client/out/src/extension",
 	"name": "lua",
 	"publisher": "sumneko_infotech",
 	"repository": {
@@ -3341,5 +3467,5 @@
 	"sponsor": {
 		"url": "https://github.com/LuaLS/lua-language-server/issues/484"
 	},
-	"version": "3.7.0-ita-3"
+	"version": "3.18.2-ita-1"
 }

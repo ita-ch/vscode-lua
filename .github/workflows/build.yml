@@ -25,58 +25,35 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-20.04,   target: linux,   platform: linux-x64,   container: 'ubuntu:18.04' }
-          - { os: ubuntu-20.04,   target: linux,   platform: linux-arm64, container: 'ubuntu:18.04' }
-          - { os: macos-11,       target: darwin,  platform: darwin-x64   }
-          - { os: macos-11,       target: darwin,  platform: darwin-arm64 }
-          - { os: windows-latest, target: windows, platform: win32-ia32   }
-          - { os: windows-latest, target: windows, platform: win32-x64    }
+          - { os: ubuntu-22.04,     target: linux,   platform: linux-x64    }
+          - { os: ubuntu-24.04-arm, target: linux,   platform: linux-arm64  }
+          - { os: macos-latest,     target: darwin,  platform: darwin-x64   }
+          - { os: macos-latest,     target: darwin,  platform: darwin-arm64 }
+          - { os: windows-latest,   target: windows, platform: win32-x64    }
+          #- { os: windows-latest, target: windows, platform: win32-ia32   } # 不再支持32位
     runs-on: ${{ matrix.os }}
-    container:
-      image: ${{ matrix.container }}
     steps:
-      - name: Prepare container
-        if: ${{ matrix.target == 'linux' }}
-        run: |
-          apt-get update
-          apt-get install -y software-properties-common
-          add-apt-repository -y ppa:ubuntu-toolchain-r/test # For gcc-9 and g++-9
-          add-apt-repository -y ppa:git-core/ppa # For git>=2.18.
-          apt-get update
-          apt-get install -y sudo git gcc-9 g++-9
-
-          apt-get install -y curl
-          curl -sL https://deb.nodesource.com/setup_14.x -o /tmp/nodesource_setup.sh # For nodejs
-          sudo bash /tmp/nodesource_setup.sh
-          cd ~
-          curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-          sudo bash /tmp/nodesource_setup.sh
-          sudo apt install nodejs
-
-      - name: Install aarch64-linux-gnu
-        if: ${{ matrix.platform == 'linux-arm64' }}
-        run: |
-          apt-get update
-          apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-
-      - name: Prepare container
-        if: ${{ matrix.target == 'linux' }}
-        run: |
-          update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100
-          update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 100
-
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
       - uses: actboy168/setup-luamake@master
 
-      - name: Run luamake
-        id: luamake
+      - name: Install zig
+        if: matrix.target == 'linux'
+        run:
+          sudo snap install zig --classic --beta
+
+      - name: Prepare zig wrapper
+        if: matrix.target == 'linux'
         working-directory: ./server
-        run: |
-          luamake -platform ${{ matrix.platform }}
-          rm -r ./build
+        run: chmod +x zig-cc-wrapper.sh
+
+      - name: Build
+        working-directory: ./server
+        env:
+          USE_ZIG: ${{ matrix.target == 'linux' && '1' || '0' }}
+        run: luamake -platform ${{ matrix.platform }}
 
       - name: Setting up workflow variables
         id: vars
@@ -122,7 +99,7 @@ jobs:
           npm install -g @vscode/vsce
           vsce package -o ${{ steps.vars.outputs.PKG_NAME }} -t ${{ matrix.platform }}
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.vars.outputs.PKG_BASENAME }}
           path: ${{ steps.vars.outputs.PKG_NAME }}

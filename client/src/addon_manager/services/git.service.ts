@@ -2,15 +2,15 @@ import * as vscode from "vscode";
 import simpleGit from "simple-git";
 import filesystem from "./filesystem.service";
 import { createChildLogger } from "./logging.service";
-import { REPOSITORY_NAME, REPOSITORY_PATH } from "../config";
+import { REPOSITORY_NAME, REPOSITORY, getStorageUri } from "../config";
 
 const localLogger = createChildLogger("Git");
 
-export const git = simpleGit();
+export const git = simpleGit({ trimmed: true });
 
 export const setupGit = async (context: vscode.ExtensionContext) => {
     const storageURI = vscode.Uri.joinPath(
-        context.globalStorageUri,
+        getStorageUri(context),
         "addonManager"
     );
     await filesystem.createDirectory(storageURI);
@@ -24,8 +24,7 @@ export const setupGit = async (context: vscode.ExtensionContext) => {
             localLogger.debug(
                 `Attempting to clone ${REPOSITORY_NAME} to ${storageURI.fsPath}`
             );
-            const options = { "--depth": 1 };
-            await git.clone(REPOSITORY_PATH, storageURI.fsPath, options);
+            await git.clone(REPOSITORY.PATH, storageURI.fsPath);
             localLogger.debug(
                 `Cloned ${REPOSITORY_NAME} to ${storageURI.fsPath}`
             );
@@ -41,7 +40,7 @@ export const setupGit = async (context: vscode.ExtensionContext) => {
     try {
         await git.fetch();
         await git.pull();
-        await git.checkout("main");
+        await git.checkout(REPOSITORY.DEFAULT_BRANCH);
     } catch (e) {
         localLogger.warn(`Failed to pull ${REPOSITORY_NAME}!`);
         throw e;

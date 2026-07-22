@@ -16,25 +16,25 @@
         },
         "addonManager.enable": {
             "default": true,
-            "markdownDescription": "Whether the addon manager is enabled or not.",
+            "markdownDescription": "Si el manejador de extensiones está habilitado.",
             "scope": "resource",
             "type": "boolean"
         },
         "addonManager.repositoryBranch": {
             "default": "",
-            "markdownDescription": "Specifies the git branch used by the addon manager.",
+            "markdownDescription": "Especifica la rama de git usada por el manejador de extensiones.",
             "scope": "resource",
             "type": "string"
         },
         "addonManager.repositoryPath": {
             "default": "",
-            "markdownDescription": "Specifies the git path used by the addon manager.",
+            "markdownDescription": "Especifica la ruta git usada por el manejador de extensiones.",
             "scope": "resource",
             "type": "string"
         },
         "addonRepositoryPath": {
             "default": "",
-            "markdownDescription": "Specifies the addon repository path (not related to the addon manager).",
+            "markdownDescription": "Especifica la ruta del repositorio de complementos (no relacionada con el gestor de complementos).",
             "scope": "resource",
             "type": "string"
         },
@@ -47,7 +47,7 @@
         },
         "codeLens.enable": {
             "default": false,
-            "markdownDescription": "Enable code lens.",
+            "markdownDescription": "Habilita el lente para código.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -90,7 +90,7 @@
         },
         "completion.autoRequire": {
             "default": true,
-            "markdownDescription": "When the input looks like a file name, automatically `require` this file.",
+            "markdownDescription": "Agrega automáticamente el `require` correspondiente cuando la entrada se parece a un nombre de archivo.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -101,24 +101,24 @@
                 "Both",
                 "Replace"
             ],
-            "markdownDescription": "Shows function call snippets.",
+            "markdownDescription": "Muestra snippets para llamadas de funciones.",
             "markdownEnumDescriptions": [
-                "Only shows `function name`.",
-                "Shows `function name` and `call snippet`.",
-                "Only shows `call snippet.`"
+                "Solo muestra `función nombre`.",
+                "Muestra `función nombre` y `llamar al snippet`.",
+                "Solo muestra `llamar al snippet`."
             ],
             "scope": "resource",
             "type": "string"
         },
         "completion.displayContext": {
             "default": 0,
-            "markdownDescription": "Previewing the relevant code snippet of the suggestion may help you understand the usage of the suggestion. The number set indicates the number of intercepted lines in the code fragment. If it is set to `0`, this feature can be disabled.",
+            "markdownDescription": "La prevista de la sugerencia del snippet de código relevante ayuda a entender el uso de la sugerenecia. El número fijado indica el número de líneas interceptadas en el fragmento de código. Fijando en `0` se deshabilita esta característica.",
             "scope": "resource",
             "type": "integer"
         },
         "completion.enable": {
             "default": true,
-            "markdownDescription": "Enable completion.",
+            "markdownDescription": "Habilita la completación.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -129,36 +129,36 @@
                 "Both",
                 "Replace"
             ],
-            "markdownDescription": "Shows keyword syntax snippets.",
+            "markdownDescription": "Muestra snippets con sintaxis de palabras clave.",
             "markdownEnumDescriptions": [
-                "Only shows `keyword`.",
-                "Shows `keyword` and `syntax snippet`.",
-                "Only shows `syntax snippet`."
+                "Solo muestra `palabra clave`.",
+                "Muestra `palabra clave` y `snippet de sintaxis`.",
+                "Solo muestra `snippet de sintaxis`."
             ],
             "scope": "resource",
             "type": "string"
         },
         "completion.maxSuggestCount": {
             "default": 100,
-            "markdownDescription": "Maximum number of fields to analyze for completions. When an object has more fields than this limit, completions will require more specific input to appear.",
+            "markdownDescription": "Número máximo de campos a analizar para autocompletar. Cuando un objeto tiene más campos que este límite, las sugerencias requerirán una entrada más específica para aparecer.",
             "scope": "resource",
             "type": "integer"
         },
         "completion.postfix": {
             "default": "@",
-            "markdownDescription": "The symbol used to trigger the postfix suggestion.",
+            "markdownDescription": "El símbolo usado para lanzar la sugerencia posfija.",
             "scope": "resource",
             "type": "string"
         },
         "completion.requireSeparator": {
             "default": ".",
-            "markdownDescription": "The separator used when `require`.",
+            "markdownDescription": "Separador usado en `require`.",
             "scope": "resource",
             "type": "string"
         },
         "completion.showParams": {
             "default": true,
-            "markdownDescription": "Display parameters in completion list. When the function has multiple definitions, they will be displayed separately.",
+            "markdownDescription": "Muestra los parámetros en la lista de completado. Cuando la función tiene múltiples definiciones, se mostrarán por separado.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -169,18 +169,18 @@
                 "Fallback",
                 "Disable"
             ],
-            "markdownDescription": "Show contextual words in suggestions.",
+            "markdownDescription": "Muestra palabras contextuales en las sugerencias.",
             "markdownEnumDescriptions": [
-                "Always show context words in suggestions.",
-                "Contextual words are only displayed when suggestions based on semantics cannot be provided.",
-                "Do not display context words."
+                "Siempre muestra palabras contextuales en las sugerencias.",
+                "Las palabras contextuales solo se muestran si las sugerencias basadas en la semántica no están provistas.",
+                "Sin presentar las palabras contextuales."
             ],
             "scope": "resource",
             "type": "string"
         },
         "completion.workspaceWord": {
             "default": true,
-            "markdownDescription": "Whether the displayed context word contains the content of other files in the workspace.",
+            "markdownDescription": "Si es que el la palabra contextual presentada contiene contenido de otros archivos en el espacio de trabajo.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -378,13 +378,13 @@
                 ],
                 "type": "string"
             },
-            "markdownDescription": "Disabled diagnostic (Use code in hover brackets).",
+            "markdownDescription": "Deshabilita los diagnósticos (Usa código en corchetes bajo el cursor).",
             "scope": "resource",
             "type": "array"
         },
         "diagnostics.enable": {
             "default": true,
-            "markdownDescription": "Enable diagnostics.",
+            "markdownDescription": "Habilita los diagnósticos.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -404,7 +404,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Defined global variables.",
+            "markdownDescription": "Variables globales definidas.",
             "scope": "resource",
             "type": "array"
         },
@@ -413,13 +413,13 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Find defined global variables using regex.",
+            "markdownDescription": "Encuentra variables globales definidas usando esta expresión regular.",
             "scope": "resource",
             "type": "array"
         },
         "diagnostics.groupFileStatus": {
             "additionalProperties": false,
-            "markdownDescription": "Modify the diagnostic needed file status in a group.\n\n* Opened:  only diagnose opened files\n* Any:     diagnose all files\n* None:    disable this diagnostic\n\n`Fallback` means that diagnostics in this group are controlled by `diagnostics.neededFileStatus` separately.\nOther settings will override individual settings without end of `!`.\n",
+            "markdownDescription": "Modifica los diagnósticos de archivos requeridos en un grupo.\n\n* Opened:  solo diagnostica los archivos abiertos\n* Any:     diagnostica todos los archivos\n* None:    deshabilita este diagnóstico\n\n`Fallback` significa que los diagnósticos en este grupo son controlados con una severida separada de `diagnostics.neededFileStatus`.\nOtras configuraciones descartan las configuraciones individuales que no terminen en `!`.\n",
             "properties": {
                 "ambiguity": {
                     "default": "Fallback",
@@ -571,7 +571,7 @@
         },
         "diagnostics.groupSeverity": {
             "additionalProperties": false,
-            "markdownDescription": "Modify the diagnostic severity in a group.\n`Fallback` means that diagnostics in this group are controlled by `diagnostics.severity` separately.\nOther settings will override individual settings without end of `!`.\n",
+            "markdownDescription": "Modifica el la severirad de los diagnósticos en un grupo.\n`Fallback` significa que los diagnósticos en este grupo son controlados con una severida separada de `diagnostics.severity`.\nOtras configuraciones descartan las configuraciones individuales que no terminen en `!`.\n",
             "properties": {
                 "ambiguity": {
                     "default": "Fallback",
@@ -741,11 +741,11 @@
                 "Opened",
                 "Disable"
             ],
-            "markdownDescription": "How to diagnose ignored files.",
+            "markdownDescription": "Cómo diagnosticar los archivos ignorados.",
             "markdownEnumDescriptions": [
-                "Always diagnose these files.",
-                "Only when these files are opened will it be diagnosed.",
-                "These files are not diagnosed."
+                "Estos archivos siempre se diagnostican.",
+                "Estos archivos se diagnostican solo cuando se abren.",
+                "Estos archivos no se diagnostican."
             ],
             "scope": "resource",
             "type": "string"
@@ -757,22 +757,22 @@
                 "Opened",
                 "Disable"
             ],
-            "markdownDescription": "How to diagnose files loaded via `Lua.workspace.library`.",
+            "markdownDescription": "Cómo diagnosticar los archivos cargados via `Lua.workspace.library`.",
             "markdownEnumDescriptions": [
-                "Always diagnose these files.",
-                "Only when these files are opened will it be diagnosed.",
-                "These files are not diagnosed."
+                "Estos archivos siempre se diagnostican.",
+                "Estos archivos se diagnostican solo cuando se abren.",
+                "Estos archivos no se diagnostican."
             ],
             "scope": "resource",
             "type": "string"
         },
         "diagnostics.neededFileStatus": {
             "additionalProperties": false,
-            "markdownDescription": "* Opened:  only diagnose opened files\n* Any:     diagnose all files\n* None:    disable this diagnostic\n\nEnd with `!` means override the group setting `diagnostics.groupFileStatus`.\n",
+            "markdownDescription": "* Opened:  Solo diagnostica los archivos abiertos\n* Any:     diagnostica todos los archivos\n* None:    deshabilita este diagnóstico\n\nAgregue `!` al final para descartar la configuración `diagnostics.groupFileStatus`.\n",
             "properties": {
                 "ambiguity-1": {
                     "default": "Any",
-                    "description": "Enable ambiguous operator precedence diagnostics. For example, the `num or 0 + 1` expression will be suggested `(num or 0) + 1` instead.",
+                    "description": "Habilita el diagnóstico de precedencia de operadores ambiguos. Por ejemplo, ante la expresión `num or 0 + 1` se sugerirrá `(num or 0) + 1`.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -785,7 +785,7 @@
                 },
                 "assign-type-mismatch": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for assignments in which the value's type does not match the type of the assigned variable.",
+                    "description": "Habilita el diagnóstico para asignaciones en las cuales el valor del tipo no calza con el tipo de la variable siendo asignada.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -798,7 +798,7 @@
                 },
                 "await-in-sync": {
                     "default": "None",
-                    "description": "Enable diagnostics for calls of asynchronous functions within a synchronous function.",
+                    "description": "Habilita el diagnóstico para llamadas a funciones asíncronas dentro de una función síncrona.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -811,7 +811,7 @@
                 },
                 "cast-local-type": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for casts of local variables where the target type does not match the defined type.",
+                    "description": "Habilita el diagnóstico para conversión de tipos de variables locales donde el tipo objetivo no calza con el tipo definido.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -824,7 +824,7 @@
                 },
                 "cast-type-mismatch": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for casts where the target type does not match the initial type.",
+                    "description": "Habilita el diagnóstico para conversiones de tipos donde el tipo objetivo no calza con el tipo inicial.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -850,7 +850,7 @@
                 },
                 "close-non-object": {
                     "default": "Any",
-                    "description": "Enable diagnostics for attempts to close a variable with a non-object.",
+                    "description": "Habilita el diagnóstico para intentos de cerra una variable con un no-objeto.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -863,7 +863,7 @@
                 },
                 "code-after-break": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for code placed after a break statement in a loop.",
+                    "description": "Habilita el diagnóstico para el código que viene después de un `break` en un bucle.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -876,7 +876,7 @@
                 },
                 "codestyle-check": {
                     "default": "None",
-                    "description": "Enable diagnostics for incorrectly styled lines.",
+                    "description": "Habilita el diagnóstico para líneas formateadas incorrectamente.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -889,7 +889,7 @@
                 },
                 "count-down-loop": {
                     "default": "Any",
-                    "description": "Enable diagnostics for `for` loops which will never reach their max/limit because the loop is incrementing instead of decrementing.",
+                    "description": "Habilita el diagnóstico para bucles `for` en los cuales nunca se alcanza su máximo o límite por que el bucle es incremental en vez de decremental.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -902,7 +902,7 @@
                 },
                 "deprecated": {
                     "default": "Any",
-                    "description": "Enable diagnostics to highlight deprecated API.",
+                    "description": "Habilita el diagnóstico para resaltar APIs obsoletas.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -915,7 +915,7 @@
                 },
                 "different-requires": {
                     "default": "Any",
-                    "description": "Enable diagnostics for files which are required by two different paths.",
+                    "description": "Habilita el diagnóstico para archivos que son requeridos con dos rutas distintas.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -928,7 +928,7 @@
                 },
                 "discard-returns": {
                     "default": "Any",
-                    "description": "Enable diagnostics for calls of functions annotated with `---@nodiscard` where the return values are ignored.",
+                    "description": "Habilita el diagnóstico para llamadas de funciones anotadas con `---@nodiscard` en las cuales se ignore los valores retornados.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -941,7 +941,7 @@
                 },
                 "doc-field-no-class": {
                     "default": "Any",
-                    "description": "Enable diagnostics to highlight a field annotation without a defining class annotation.",
+                    "description": "Habilita el diagnóstico para resaltar una anotación de campo sin una anotación de clase que lo defina.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -954,7 +954,7 @@
                 },
                 "duplicate-doc-alias": {
                     "default": "Any",
-                    "description": "Enable diagnostics for a duplicated alias annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de alias duplicados en una anotación.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -967,7 +967,7 @@
                 },
                 "duplicate-doc-field": {
                     "default": "Any",
-                    "description": "Enable diagnostics for a duplicated field annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de campo duplicados en una anotación.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -980,7 +980,7 @@
                 },
                 "duplicate-doc-param": {
                     "default": "Any",
-                    "description": "Enable diagnostics for a duplicated param annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de parámetros duplicados en una anotación.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -993,7 +993,7 @@
                 },
                 "duplicate-index": {
                     "default": "Any",
-                    "description": "Enable duplicate table index diagnostics.",
+                    "description": "Habilita el diagnóstico de índices de tabla duplicados.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1006,7 +1006,7 @@
                 },
                 "duplicate-set-field": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for setting the same field in a class more than once.",
+                    "description": "Habilita el diagnóstico para cuando se asigna el mismo campo en una clase más de una vez.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1019,7 +1019,7 @@
                 },
                 "empty-block": {
                     "default": "Opened",
-                    "description": "Enable empty code block diagnostics.",
+                    "description": "Habilita el diagnóstico de bloques de código vacíos.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1032,7 +1032,7 @@
                 },
                 "global-element": {
                     "default": "None",
-                    "description": "Enable diagnostics to warn about global elements.",
+                    "description": "Habilita el diagnóstico que alerta sobre elementos globales.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1045,7 +1045,7 @@
                 },
                 "global-in-nil-env": {
                     "default": "Any",
-                    "description": "Enable cannot use global variables （ `_ENV` is set to `nil`） diagnostics.",
+                    "description": "Habilita el diagnóstico para la prohibición de uso de variables globales (`_ENV` se fija a `nil`).",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1058,7 +1058,7 @@
                 },
                 "incomplete-signature-doc": {
                     "default": "None",
-                    "description": "Incomplete @param or @return annotations for functions.",
+                    "description": "Habilita el diagnóstico para anotaciones @param o @return incompletas para funciones.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1084,7 +1084,7 @@
                 },
                 "invisible": {
                     "default": "Any",
-                    "description": "Enable diagnostics for accesses to fields which are invisible.",
+                    "description": "Habilita el diagnóstico para accesos a campos que son invisibles.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1097,7 +1097,7 @@
                 },
                 "lowercase-global": {
                     "default": "Any",
-                    "description": "Enable lowercase global variable definition diagnostics.",
+                    "description": "Habilita el diagnóstico de definiciones de variables globacels con minúsculas.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1123,7 +1123,7 @@
                 },
                 "missing-global-doc": {
                     "default": "None",
-                    "description": "Missing annotations for globals! Global functions must have a comment and annotations for all parameters and return values.",
+                    "description": "Habilita el diagnóstico para globales faltantes. Las funciones globales deben tener un comentario y anotaciones para todos sus parámetros y valores retornados.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1136,7 +1136,7 @@
                 },
                 "missing-local-export-doc": {
                     "default": "None",
-                    "description": "Missing annotations for exported locals! Exported local functions must have a comment and annotations for all parameters and return values.",
+                    "description": "Habilita el diagnóstico para locales exportadas. Las funciones locales deben tener un comentario y anotaciones para todos sus parámetros y valores retornados.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1149,7 +1149,7 @@
                 },
                 "missing-parameter": {
                     "default": "Any",
-                    "description": "Enable diagnostics for function calls where the number of arguments is less than the number of annotated function parameters.",
+                    "description": "Habilita el diagnóstico para llamados de funciones donde el número de argumentos es menore que el número de parámetros anotados de la función.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1162,7 +1162,7 @@
                 },
                 "missing-return": {
                     "default": "Any",
-                    "description": "Enable diagnostics for functions with return annotations which have no return statement.",
+                    "description": "Habilita el diagnóstico para para funciones con anotaciones de retorno que no tienen la expresión `return …`.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1175,7 +1175,7 @@
                 },
                 "missing-return-value": {
                     "default": "Any",
-                    "description": "Enable diagnostics for return statements without values although the containing function declares returns.",
+                    "description": "Habilita el diagnóstico para expresiones `return …` sin valores aunque la función que la contiene declare retornos.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1188,7 +1188,7 @@
                 },
                 "name-style-check": {
                     "default": "None",
-                    "description": "Enable diagnostics for name style.",
+                    "description": "Habilita el diagnóstico para el estilo de nombres.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1201,7 +1201,7 @@
                 },
                 "need-check-nil": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for variable usages if `nil` or an optional (potentially `nil`) value was assigned to the variable before.",
+                    "description": "Habilita el diagnóstico para usos de variables si `nil` o un valor opcional (potencialmente `nil`) haya sido asignado a la variable anteriormente.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1214,7 +1214,7 @@
                 },
                 "newfield-call": {
                     "default": "Any",
-                    "description": "Enable newfield call diagnostics. It is raised when the parenthesis of a function call appear on the following line when defining a field in a table.",
+                    "description": "Habilita el diagnóstico de campo nuevo en una llamada. Se alza un error cuando los paréntesis de una llamada a una función aparecen en la siguiente línea cuando se define un campo en una tabla.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1227,7 +1227,7 @@
                 },
                 "newline-call": {
                     "default": "Any",
-                    "description": "Enable newline call diagnostics. It's raised when a line starting with `(` is encountered, which is syntactically parsed as a function call on the previous line.",
+                    "description": "Habilita el diagnóstico de llamadas en línea nueva. Se alza un error en las líneas que comienzan con `(`, lo que se lee sintácticamente como una llamada a la línea anterior.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1240,7 +1240,7 @@
                 },
                 "no-unknown": {
                     "default": "None",
-                    "description": "Enable diagnostics for cases in which the type cannot be inferred.",
+                    "description": "Habilita el diagnóstico para los casos en que el tipo no puede ser inferido.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1253,7 +1253,7 @@
                 },
                 "not-yieldable": {
                     "default": "None",
-                    "description": "Enable diagnostics for calls to `coroutine.yield()` when it is not permitted.",
+                    "description": "Habilita el diagnóstico para llamadas a `coroutine.yield()` cuando no esté permitido.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1266,7 +1266,7 @@
                 },
                 "param-type-mismatch": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for function calls where the type of a provided parameter does not match the type of the annotated function definition.",
+                    "description": "Habilita el diagnóstico para llamadas a funciones donde el tipo de un parámetro provisto no calza con el tipo de la definición anotado de la función.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1279,7 +1279,7 @@
                 },
                 "redefined-local": {
                     "default": "Opened",
-                    "description": "Enable redefined local variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables locals redefinidas.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1292,7 +1292,7 @@
                 },
                 "redundant-parameter": {
                     "default": "Any",
-                    "description": "Enable redundant function parameter diagnostics.",
+                    "description": "Habilita el diagnóstico de parámetros redundantes de una función.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1305,7 +1305,7 @@
                 },
                 "redundant-return": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for return statements which are not needed because the function would exit on its own.",
+                    "description": "Habilita el diagnóstico para sentencias de retorno que no son necesarias porque la función terminaría de igual manera.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1318,7 +1318,7 @@
                 },
                 "redundant-return-value": {
                     "default": "Any",
-                    "description": "Enable diagnostics for return statements which return an extra value which is not specified by a return annotation.",
+                    "description": "Habilita el diagnóstico para sentencias de retorno que retornan un valor extra que no fue especificado por una anotación de retorno.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1331,7 +1331,7 @@
                 },
                 "redundant-value": {
                     "default": "Any",
-                    "description": "Enable the redundant values assigned diagnostics. It's raised during assignment operation, when the number of values is higher than the number of objects being assigned.",
+                    "description": "Habilita el diagnóstico de valores asignados redundantemente. Se alza un error en una asignación, cuando el número de valores es mayor que el número de objetos a los cuales se les asigna.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1344,7 +1344,7 @@
                 },
                 "return-type-mismatch": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for return values whose type does not match the type declared in the corresponding return annotation.",
+                    "description": "Habilita el diagnóstico para valores retornados cuyo tipo no calza con el tipo declarado en la anotación correspondiente de la función.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1357,7 +1357,7 @@
                 },
                 "spell-check": {
                     "default": "None",
-                    "description": "Enable diagnostics for typos in strings.",
+                    "description": "Habilita el diagnóstico para errores tipográficos en strings.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1370,7 +1370,7 @@
                 },
                 "trailing-space": {
                     "default": "Opened",
-                    "description": "Enable trailing space diagnostics.",
+                    "description": "Habilita el diagnóstico de espacios al final de línea.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1383,7 +1383,7 @@
                 },
                 "unbalanced-assignments": {
                     "default": "Any",
-                    "description": "Enable diagnostics on multiple assignments if not all variables obtain a value (e.g., `local x,y = 1`).",
+                    "description": "Habilita el diagnóstico para asignaciones múltiplies si no todas las variables obtienen un valor (por ejemplo, `local x,y = 1`).",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1396,7 +1396,7 @@
                 },
                 "undefined-doc-class": {
                     "default": "Any",
-                    "description": "Enable diagnostics for class annotations in which an undefined class is referenced.",
+                    "description": "Habilita el diagnóstico para las anotaciones de clase en las cuales una clase sin definir es referenciada.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1409,7 +1409,7 @@
                 },
                 "undefined-doc-name": {
                     "default": "Any",
-                    "description": "Enable diagnostics for type annotations referencing an undefined type or alias.",
+                    "description": "Habilita el diagnóstico para anotaciones de tipo que referencian a un tipo o alias sin definir.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1422,7 +1422,7 @@
                 },
                 "undefined-doc-param": {
                     "default": "Any",
-                    "description": "Enable diagnostics for cases in which a parameter annotation is given without declaring the parameter in the function definition.",
+                    "description": "Habilita el diagnóstico para casos en que una anotación de parámetro es dado sin declarar el parámetro en la definición de la función.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1435,7 +1435,7 @@
                 },
                 "undefined-env-child": {
                     "default": "Any",
-                    "description": "Enable undefined environment variable diagnostics. It's raised when `_ENV` table is set to a new literal table, but the used global variable is no longer present in the global environment.",
+                    "description": "Habilita el diagnóstico de variables de ambientes sin definir. Se alza un error cuando a la tabla `_ENV` se le asigna una tabla literal nueva, pero la variable global usada no está presente en el ambiente global.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1448,7 +1448,7 @@
                 },
                 "undefined-field": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for cases in which an undefined field of a variable is read.",
+                    "description": "Habilita el diagnóstico para los casos en que se lee un campo sin definir de una variable.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1461,7 +1461,7 @@
                 },
                 "undefined-global": {
                     "default": "Any",
-                    "description": "Enable undefined global variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables globales sin definir.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1474,7 +1474,7 @@
                 },
                 "unknown-cast-variable": {
                     "default": "Any",
-                    "description": "Enable diagnostics for casts of undefined variables.",
+                    "description": "Habilita el diagnóstico para conversiones de tipo de variables sin definir.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1487,7 +1487,7 @@
                 },
                 "unknown-diag-code": {
                     "default": "Any",
-                    "description": "Enable diagnostics in cases in which an unknown diagnostics code is entered.",
+                    "description": "Habilita el diagnóstico para los casos en que un código desconocido de diagnóstico es ingresado.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1500,7 +1500,7 @@
                 },
                 "unknown-operator": {
                     "default": "Any",
-                    "description": "Enable diagnostics for unknown operators.",
+                    "description": "Habilita el diagnóstico para operadores desconocidos.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1513,7 +1513,7 @@
                 },
                 "unreachable-code": {
                     "default": "Opened",
-                    "description": "Enable diagnostics for unreachable code.",
+                    "description": "Habilita el diagnóstico para código inalcanzable.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1526,7 +1526,7 @@
                 },
                 "unused-function": {
                     "default": "Opened",
-                    "description": "Enable unused function diagnostics.",
+                    "description": "Habilita el diagnóstico funcines sin uso.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1539,7 +1539,7 @@
                 },
                 "unused-label": {
                     "default": "Opened",
-                    "description": "Enable unused label diagnostics.",
+                    "description": "Habilita el diagnóstico de etiquetas sin uso.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1552,7 +1552,7 @@
                 },
                 "unused-local": {
                     "default": "Opened",
-                    "description": "Enable unused local variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables local sin uso.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1565,7 +1565,7 @@
                 },
                 "unused-vararg": {
                     "default": "Opened",
-                    "description": "Enable unused vararg diagnostics.",
+                    "description": "Habilita el diagnóstico de expresión de número variable de argumentos (vararg) sin uso.",
                     "enum": [
                         "Any",
                         "Opened",
@@ -1583,11 +1583,11 @@
         },
         "diagnostics.severity": {
             "additionalProperties": false,
-            "markdownDescription": "Modify the diagnostic severity.\n\nEnd with `!` means override the group setting `diagnostics.groupSeverity`.\n",
+            "markdownDescription": "Modifica el la severirad de los diagnósticos.\n\nAgregue `!` al final para descartar la configuración `diagnostics.groupSeverity`.\n",
             "properties": {
                 "ambiguity-1": {
                     "default": "Warning",
-                    "description": "Enable ambiguous operator precedence diagnostics. For example, the `num or 0 + 1` expression will be suggested `(num or 0) + 1` instead.",
+                    "description": "Habilita el diagnóstico de precedencia de operadores ambiguos. Por ejemplo, ante la expresión `num or 0 + 1` se sugerirrá `(num or 0) + 1`.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1602,7 +1602,7 @@
                 },
                 "assign-type-mismatch": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for assignments in which the value's type does not match the type of the assigned variable.",
+                    "description": "Habilita el diagnóstico para asignaciones en las cuales el valor del tipo no calza con el tipo de la variable siendo asignada.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1617,7 +1617,7 @@
                 },
                 "await-in-sync": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for calls of asynchronous functions within a synchronous function.",
+                    "description": "Habilita el diagnóstico para llamadas a funciones asíncronas dentro de una función síncrona.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1632,7 +1632,7 @@
                 },
                 "cast-local-type": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for casts of local variables where the target type does not match the defined type.",
+                    "description": "Habilita el diagnóstico para conversión de tipos de variables locales donde el tipo objetivo no calza con el tipo definido.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1647,7 +1647,7 @@
                 },
                 "cast-type-mismatch": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for casts where the target type does not match the initial type.",
+                    "description": "Habilita el diagnóstico para conversiones de tipos donde el tipo objetivo no calza con el tipo inicial.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1677,7 +1677,7 @@
                 },
                 "close-non-object": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for attempts to close a variable with a non-object.",
+                    "description": "Habilita el diagnóstico para intentos de cerra una variable con un no-objeto.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1692,7 +1692,7 @@
                 },
                 "code-after-break": {
                     "default": "Hint",
-                    "description": "Enable diagnostics for code placed after a break statement in a loop.",
+                    "description": "Habilita el diagnóstico para el código que viene después de un `break` en un bucle.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1707,7 +1707,7 @@
                 },
                 "codestyle-check": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for incorrectly styled lines.",
+                    "description": "Habilita el diagnóstico para líneas formateadas incorrectamente.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1722,7 +1722,7 @@
                 },
                 "count-down-loop": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for `for` loops which will never reach their max/limit because the loop is incrementing instead of decrementing.",
+                    "description": "Habilita el diagnóstico para bucles `for` en los cuales nunca se alcanza su máximo o límite por que el bucle es incremental en vez de decremental.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1737,7 +1737,7 @@
                 },
                 "deprecated": {
                     "default": "Warning",
-                    "description": "Enable diagnostics to highlight deprecated API.",
+                    "description": "Habilita el diagnóstico para resaltar APIs obsoletas.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1752,7 +1752,7 @@
                 },
                 "different-requires": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for files which are required by two different paths.",
+                    "description": "Habilita el diagnóstico para archivos que son requeridos con dos rutas distintas.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1767,7 +1767,7 @@
                 },
                 "discard-returns": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for calls of functions annotated with `---@nodiscard` where the return values are ignored.",
+                    "description": "Habilita el diagnóstico para llamadas de funciones anotadas con `---@nodiscard` en las cuales se ignore los valores retornados.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1782,7 +1782,7 @@
                 },
                 "doc-field-no-class": {
                     "default": "Warning",
-                    "description": "Enable diagnostics to highlight a field annotation without a defining class annotation.",
+                    "description": "Habilita el diagnóstico para resaltar una anotación de campo sin una anotación de clase que lo defina.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1797,7 +1797,7 @@
                 },
                 "duplicate-doc-alias": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for a duplicated alias annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de alias duplicados en una anotación.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1812,7 +1812,7 @@
                 },
                 "duplicate-doc-field": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for a duplicated field annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de campo duplicados en una anotación.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1827,7 +1827,7 @@
                 },
                 "duplicate-doc-param": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for a duplicated param annotation name.",
+                    "description": "Habilita el diagnóstico para nombres de parámetros duplicados en una anotación.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1842,7 +1842,7 @@
                 },
                 "duplicate-index": {
                     "default": "Warning",
-                    "description": "Enable duplicate table index diagnostics.",
+                    "description": "Habilita el diagnóstico de índices de tabla duplicados.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1857,7 +1857,7 @@
                 },
                 "duplicate-set-field": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for setting the same field in a class more than once.",
+                    "description": "Habilita el diagnóstico para cuando se asigna el mismo campo en una clase más de una vez.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1872,7 +1872,7 @@
                 },
                 "empty-block": {
                     "default": "Hint",
-                    "description": "Enable empty code block diagnostics.",
+                    "description": "Habilita el diagnóstico de bloques de código vacíos.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1887,7 +1887,7 @@
                 },
                 "global-element": {
                     "default": "Warning",
-                    "description": "Enable diagnostics to warn about global elements.",
+                    "description": "Habilita el diagnóstico que alerta sobre elementos globales.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1902,7 +1902,7 @@
                 },
                 "global-in-nil-env": {
                     "default": "Warning",
-                    "description": "Enable cannot use global variables （ `_ENV` is set to `nil`） diagnostics.",
+                    "description": "Habilita el diagnóstico para la prohibición de uso de variables globales (`_ENV` se fija a `nil`).",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1917,7 +1917,7 @@
                 },
                 "incomplete-signature-doc": {
                     "default": "Warning",
-                    "description": "Incomplete @param or @return annotations for functions.",
+                    "description": "Habilita el diagnóstico para anotaciones @param o @return incompletas para funciones.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1947,7 +1947,7 @@
                 },
                 "invisible": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for accesses to fields which are invisible.",
+                    "description": "Habilita el diagnóstico para accesos a campos que son invisibles.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1962,7 +1962,7 @@
                 },
                 "lowercase-global": {
                     "default": "Information",
-                    "description": "Enable lowercase global variable definition diagnostics.",
+                    "description": "Habilita el diagnóstico de definiciones de variables globacels con minúsculas.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -1992,7 +1992,7 @@
                 },
                 "missing-global-doc": {
                     "default": "Warning",
-                    "description": "Missing annotations for globals! Global functions must have a comment and annotations for all parameters and return values.",
+                    "description": "Habilita el diagnóstico para globales faltantes. Las funciones globales deben tener un comentario y anotaciones para todos sus parámetros y valores retornados.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2007,7 +2007,7 @@
                 },
                 "missing-local-export-doc": {
                     "default": "Warning",
-                    "description": "Missing annotations for exported locals! Exported local functions must have a comment and annotations for all parameters and return values.",
+                    "description": "Habilita el diagnóstico para locales exportadas. Las funciones locales deben tener un comentario y anotaciones para todos sus parámetros y valores retornados.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2022,7 +2022,7 @@
                 },
                 "missing-parameter": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for function calls where the number of arguments is less than the number of annotated function parameters.",
+                    "description": "Habilita el diagnóstico para llamados de funciones donde el número de argumentos es menore que el número de parámetros anotados de la función.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2037,7 +2037,7 @@
                 },
                 "missing-return": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for functions with return annotations which have no return statement.",
+                    "description": "Habilita el diagnóstico para para funciones con anotaciones de retorno que no tienen la expresión `return …`.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2052,7 +2052,7 @@
                 },
                 "missing-return-value": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for return statements without values although the containing function declares returns.",
+                    "description": "Habilita el diagnóstico para expresiones `return …` sin valores aunque la función que la contiene declare retornos.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2067,7 +2067,7 @@
                 },
                 "name-style-check": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for name style.",
+                    "description": "Habilita el diagnóstico para el estilo de nombres.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2082,7 +2082,7 @@
                 },
                 "need-check-nil": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for variable usages if `nil` or an optional (potentially `nil`) value was assigned to the variable before.",
+                    "description": "Habilita el diagnóstico para usos de variables si `nil` o un valor opcional (potencialmente `nil`) haya sido asignado a la variable anteriormente.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2097,7 +2097,7 @@
                 },
                 "newfield-call": {
                     "default": "Warning",
-                    "description": "Enable newfield call diagnostics. It is raised when the parenthesis of a function call appear on the following line when defining a field in a table.",
+                    "description": "Habilita el diagnóstico de campo nuevo en una llamada. Se alza un error cuando los paréntesis de una llamada a una función aparecen en la siguiente línea cuando se define un campo en una tabla.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2112,7 +2112,7 @@
                 },
                 "newline-call": {
                     "default": "Warning",
-                    "description": "Enable newline call diagnostics. It's raised when a line starting with `(` is encountered, which is syntactically parsed as a function call on the previous line.",
+                    "description": "Habilita el diagnóstico de llamadas en línea nueva. Se alza un error en las líneas que comienzan con `(`, lo que se lee sintácticamente como una llamada a la línea anterior.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2127,7 +2127,7 @@
                 },
                 "no-unknown": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for cases in which the type cannot be inferred.",
+                    "description": "Habilita el diagnóstico para los casos en que el tipo no puede ser inferido.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2142,7 +2142,7 @@
                 },
                 "not-yieldable": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for calls to `coroutine.yield()` when it is not permitted.",
+                    "description": "Habilita el diagnóstico para llamadas a `coroutine.yield()` cuando no esté permitido.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2157,7 +2157,7 @@
                 },
                 "param-type-mismatch": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for function calls where the type of a provided parameter does not match the type of the annotated function definition.",
+                    "description": "Habilita el diagnóstico para llamadas a funciones donde el tipo de un parámetro provisto no calza con el tipo de la definición anotado de la función.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2172,7 +2172,7 @@
                 },
                 "redefined-local": {
                     "default": "Hint",
-                    "description": "Enable redefined local variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables locals redefinidas.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2187,7 +2187,7 @@
                 },
                 "redundant-parameter": {
                     "default": "Warning",
-                    "description": "Enable redundant function parameter diagnostics.",
+                    "description": "Habilita el diagnóstico de parámetros redundantes de una función.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2202,7 +2202,7 @@
                 },
                 "redundant-return": {
                     "default": "Hint",
-                    "description": "Enable diagnostics for return statements which are not needed because the function would exit on its own.",
+                    "description": "Habilita el diagnóstico para sentencias de retorno que no son necesarias porque la función terminaría de igual manera.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2217,7 +2217,7 @@
                 },
                 "redundant-return-value": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for return statements which return an extra value which is not specified by a return annotation.",
+                    "description": "Habilita el diagnóstico para sentencias de retorno que retornan un valor extra que no fue especificado por una anotación de retorno.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2232,7 +2232,7 @@
                 },
                 "redundant-value": {
                     "default": "Warning",
-                    "description": "Enable the redundant values assigned diagnostics. It's raised during assignment operation, when the number of values is higher than the number of objects being assigned.",
+                    "description": "Habilita el diagnóstico de valores asignados redundantemente. Se alza un error en una asignación, cuando el número de valores es mayor que el número de objetos a los cuales se les asigna.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2247,7 +2247,7 @@
                 },
                 "return-type-mismatch": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for return values whose type does not match the type declared in the corresponding return annotation.",
+                    "description": "Habilita el diagnóstico para valores retornados cuyo tipo no calza con el tipo declarado en la anotación correspondiente de la función.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2262,7 +2262,7 @@
                 },
                 "spell-check": {
                     "default": "Information",
-                    "description": "Enable diagnostics for typos in strings.",
+                    "description": "Habilita el diagnóstico para errores tipográficos en strings.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2277,7 +2277,7 @@
                 },
                 "trailing-space": {
                     "default": "Hint",
-                    "description": "Enable trailing space diagnostics.",
+                    "description": "Habilita el diagnóstico de espacios al final de línea.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2292,7 +2292,7 @@
                 },
                 "unbalanced-assignments": {
                     "default": "Warning",
-                    "description": "Enable diagnostics on multiple assignments if not all variables obtain a value (e.g., `local x,y = 1`).",
+                    "description": "Habilita el diagnóstico para asignaciones múltiplies si no todas las variables obtienen un valor (por ejemplo, `local x,y = 1`).",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2307,7 +2307,7 @@
                 },
                 "undefined-doc-class": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for class annotations in which an undefined class is referenced.",
+                    "description": "Habilita el diagnóstico para las anotaciones de clase en las cuales una clase sin definir es referenciada.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2322,7 +2322,7 @@
                 },
                 "undefined-doc-name": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for type annotations referencing an undefined type or alias.",
+                    "description": "Habilita el diagnóstico para anotaciones de tipo que referencian a un tipo o alias sin definir.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2337,7 +2337,7 @@
                 },
                 "undefined-doc-param": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for cases in which a parameter annotation is given without declaring the parameter in the function definition.",
+                    "description": "Habilita el diagnóstico para casos en que una anotación de parámetro es dado sin declarar el parámetro en la definición de la función.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2352,7 +2352,7 @@
                 },
                 "undefined-env-child": {
                     "default": "Information",
-                    "description": "Enable undefined environment variable diagnostics. It's raised when `_ENV` table is set to a new literal table, but the used global variable is no longer present in the global environment.",
+                    "description": "Habilita el diagnóstico de variables de ambientes sin definir. Se alza un error cuando a la tabla `_ENV` se le asigna una tabla literal nueva, pero la variable global usada no está presente en el ambiente global.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2367,7 +2367,7 @@
                 },
                 "undefined-field": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for cases in which an undefined field of a variable is read.",
+                    "description": "Habilita el diagnóstico para los casos en que se lee un campo sin definir de una variable.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2382,7 +2382,7 @@
                 },
                 "undefined-global": {
                     "default": "Warning",
-                    "description": "Enable undefined global variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables globales sin definir.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2397,7 +2397,7 @@
                 },
                 "unknown-cast-variable": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for casts of undefined variables.",
+                    "description": "Habilita el diagnóstico para conversiones de tipo de variables sin definir.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2412,7 +2412,7 @@
                 },
                 "unknown-diag-code": {
                     "default": "Warning",
-                    "description": "Enable diagnostics in cases in which an unknown diagnostics code is entered.",
+                    "description": "Habilita el diagnóstico para los casos en que un código desconocido de diagnóstico es ingresado.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2427,7 +2427,7 @@
                 },
                 "unknown-operator": {
                     "default": "Warning",
-                    "description": "Enable diagnostics for unknown operators.",
+                    "description": "Habilita el diagnóstico para operadores desconocidos.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2442,7 +2442,7 @@
                 },
                 "unreachable-code": {
                     "default": "Hint",
-                    "description": "Enable diagnostics for unreachable code.",
+                    "description": "Habilita el diagnóstico para código inalcanzable.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2457,7 +2457,7 @@
                 },
                 "unused-function": {
                     "default": "Hint",
-                    "description": "Enable unused function diagnostics.",
+                    "description": "Habilita el diagnóstico funcines sin uso.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2472,7 +2472,7 @@
                 },
                 "unused-label": {
                     "default": "Hint",
-                    "description": "Enable unused label diagnostics.",
+                    "description": "Habilita el diagnóstico de etiquetas sin uso.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2487,7 +2487,7 @@
                 },
                 "unused-local": {
                     "default": "Hint",
-                    "description": "Enable unused local variable diagnostics.",
+                    "description": "Habilita el diagnóstico de variables local sin uso.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2502,7 +2502,7 @@
                 },
                 "unused-vararg": {
                     "default": "Hint",
-                    "description": "Enable unused vararg diagnostics.",
+                    "description": "Habilita el diagnóstico de expresión de número variable de argumentos (vararg) sin uso.",
                     "enum": [
                         "Error",
                         "Warning",
@@ -2525,13 +2525,13 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Do not diagnose `unused-local` when the variable name matches the following pattern.",
+            "markdownDescription": "Las variables que calcen con el siguiente patrón no se diagnostican con `unused-local`.",
             "scope": "resource",
             "type": "array"
         },
         "diagnostics.workspaceDelay": {
             "default": 3000,
-            "markdownDescription": "Latency (milliseconds) for workspace diagnostics.",
+            "markdownDescription": "Latencia en milisegundos para diagnósticos del espacio de trabajo.",
             "scope": "resource",
             "type": "integer"
         },
@@ -2542,18 +2542,18 @@
                 "OnSave",
                 "None"
             ],
-            "markdownDescription": "Set the time to trigger workspace diagnostics.",
+            "markdownDescription": "Fija el tiempo para lanzar los diagnósticos del espacio de trabajo.",
             "markdownEnumDescriptions": [
-                "Trigger workspace diagnostics when the file is changed.",
-                "Trigger workspace diagnostics when the file is saved.",
-                "Disable workspace diagnostics."
+                "Lanza los diagnósticos del espacio de trabajo cuando se cambie el archivo.",
+                "Lanza los diagnósticos del espacio de trabajo cuando se guarde el archivo.",
+                "Deshabilita los diagnósticos del espacio de trabajo."
             ],
             "scope": "resource",
             "type": "string"
         },
         "diagnostics.workspaceRate": {
             "default": 100,
-            "markdownDescription": "Workspace diagnostics run rate (%). Decreasing this value reduces CPU usage, but also reduces the speed of workspace diagnostics. The diagnosis of the file you are currently editing is always done at full speed and is not affected by this setting.",
+            "markdownDescription": "Tasa porcentual de diagnósticos del espacio de trabajo. Decremente este valor para reducir el uso de CPU, también reduciendo la velocidad de los diagnósticos del espacio de trabajo. El diagnóstico del archivo que esté editando siempre se hace a toda velocidad y no es afectado por esta configuración.",
             "scope": "resource",
             "type": "integer"
         },
@@ -2578,7 +2578,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Treat specific field names as package, e.g. `m_*` means `XXX.m_id` and `XXX.m_type` are package, witch can only be accessed in the file where the definition is located.",
+            "markdownDescription": "Trata los nombres específicos de campo como del paquete. Por ejemplo `m_*` significa `XXX.m_id` y `XXX.m_tipo` son de paquete, por lo que solo pueden ser accedidos en el archivo donde son definidos.",
             "scope": "resource",
             "type": "array"
         },
@@ -2587,7 +2587,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Treat specific field names as private, e.g. `m_*` means `XXX.m_id` and `XXX.m_type` are private, witch can only be accessed in the class where the definition is located.",
+            "markdownDescription": "Trata los nombres específicos de campo como privados. Por ejemplo `m_*` significa `XXX.m_id` y `XXX.m_tipo` son privados, por lo que solo pueden ser accedidos donde se define la clase.",
             "scope": "resource",
             "type": "array"
         },
@@ -2596,7 +2596,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Treat specific field names as protected, e.g. `m_*` means `XXX.m_id` and `XXX.m_type` are protected, witch can only be accessed in the class where the definition is located and its subclasses.",
+            "markdownDescription": "Trata los nombres específicos de campo como protegidos. Por ejemplo `m_*` significa `XXX.m_id` y `XXX.m_tipo` son privados, por lo que solo pueden ser accedidos donde se define la clase y sus subclases.",
             "scope": "resource",
             "type": "array"
         },
@@ -2606,17 +2606,17 @@
                 "glob",
                 "lua"
             ],
-            "markdownDescription": "The regular expression engine used for matching documentation scope names.",
+            "markdownDescription": "Motor de expresiones regulares usado para coincidir nombres de ámbito de documentación.",
             "markdownEnumDescriptions": [
-                "The default lightweight pattern syntax.",
-                "Full Lua-style regular expressions."
+                "Sintaxis de patrones ligera predeterminada.",
+                "Expresiones regulares completas al estilo Lua."
             ],
             "scope": "resource",
             "type": "string"
         },
         "docScriptPath": {
             "default": "",
-            "markdownDescription": "The regular expression engine used for matching documentation scope names.",
+            "markdownDescription": "Motor de expresiones regulares usado para coincidir nombres de ámbito de documentación.",
             "scope": "resource",
             "type": "string"
         },
@@ -2633,7 +2633,7 @@
         "format.defaultConfig": {
             "additionalProperties": false,
             "default": {},
-            "markdownDescription": "The default format configuration. Has a lower priority than `.editorconfig` file in the workspace.\nRead [formatter docs](https://github.com/CppCXY/EmmyLuaCodeStyle/tree/master/docs) to learn usage.\n",
+            "markdownDescription": "La configuración de formateo predeterminada. Tiene menor prioridad que el archivo `.editorconfig`\nen el espacio de trabajo.\nRevise [la documentación del formateador](https://github.com/CppCXY/EmmyLuaCodeStyle/tree/master/docs)\npara aprender más sobre su uso.\n",
             "patternProperties": {
                 ".*": {
                     "default": "",
@@ -2646,7 +2646,7 @@
         },
         "format.enable": {
             "default": true,
-            "markdownDescription": "Enable code formatter.",
+            "markdownDescription": "Habilita el formateador de código.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -2685,30 +2685,30 @@
                 "Auto",
                 "Disable"
             ],
-            "markdownDescription": "Show hints of array index when constructing a table.",
+            "markdownDescription": "Muestra las pistas de los índices de arreglos cuando se construye una tabla.",
             "markdownEnumDescriptions": [
-                "Show hints in all tables.",
-                "Show hints only when the table is greater than 3 items, or the table is a mixed table.",
-                "Disable hints of array index."
+                "Muestra las pistas en todas las tablas.",
+                "Muestra las pistas solo cuando la tabla tiene más de 3 ítemes, o cuando la tabla es mixta.",
+                "Deshabilita las pistas en de los índices de arreglos."
             ],
             "scope": "resource",
             "type": "string"
         },
         "hint.await": {
             "default": true,
-            "markdownDescription": "If the called function is marked `---@async`, prompt `await` at the call.",
+            "markdownDescription": "Si la función que se llama está marcada con `---@async`, pregunta por un `await` en la llamada.",
             "scope": "resource",
             "type": "boolean"
         },
         "hint.awaitPropagate": {
             "default": false,
-            "markdownDescription": "Enable the propagation of `await`. When a function calls a function marked `---@async`,it will be automatically marked as `---@async`.",
+            "markdownDescription": "Habilita la propagación de `await`. Cuando una función llama a una función marcada con `---@async`,se marcará automáticamente como `---@async`.",
             "scope": "resource",
             "type": "boolean"
         },
         "hint.enable": {
             "default": false,
-            "markdownDescription": "Enable inlay hint.",
+            "markdownDescription": "Habilita pistas en línea.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -2719,18 +2719,18 @@
                 "Literal",
                 "Disable"
             ],
-            "markdownDescription": "Show hints of parameter name at the function call.",
+            "markdownDescription": "Muestra las pistas de tipo en las llamadas a funciones.",
             "markdownEnumDescriptions": [
-                "All types of parameters are shown.",
-                "Only literal type parameters are shown.",
-                "Disable parameter hints."
+                "Se muestran odos los tipos de los parámetros.",
+                "Se muestran solo los parámetros de tipos literales.",
+                "Deshabilita las pistas de los parámetros."
             ],
             "scope": "resource",
             "type": "string"
         },
         "hint.paramType": {
             "default": true,
-            "markdownDescription": "Show type hints at the parameter of the function.",
+            "markdownDescription": "Muestra las pistas de tipo al parámetro de las funciones.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -2741,18 +2741,18 @@
                 "SameLine",
                 "Disable"
             ],
-            "markdownDescription": "If there is no semicolon at the end of the statement, display a virtual semicolon.",
+            "markdownDescription": "Si no hay punto y coma al final de la sentencia, despliega un punto y coma virtual.",
             "markdownEnumDescriptions": [
-                "All statements display virtual semicolons.",
-                "When two statements are on the same line, display a semicolon between them.",
-                "Disable virtual semicolons."
+                "Todas las sentencias con un punto y coma virtual desplegado.",
+                "Cuando dos sentencias están en la misma línea, despliega un punto y coma entre ellas.",
+                "Deshabilita punto y coma virtuales."
             ],
             "scope": "resource",
             "type": "string"
         },
         "hint.setType": {
             "default": false,
-            "markdownDescription": "Show hints of type at assignment operation.",
+            "markdownDescription": "Muestra las pistas de tipo en las asignación.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -2783,43 +2783,43 @@
         },
         "hover.enable": {
             "default": true,
-            "markdownDescription": "Enable hover.",
+            "markdownDescription": "Habilita la información bajo el cursor.",
             "scope": "resource",
             "type": "boolean"
         },
         "hover.enumsLimit": {
             "default": 5,
-            "markdownDescription": "When the value corresponds to multiple types, limit the number of types displaying.",
+            "markdownDescription": "Cuando el valor corresponde a múltiples tipos, fija el límite de tipos en despliegue.",
             "scope": "resource",
             "type": "integer"
         },
         "hover.expandAlias": {
             "default": true,
-            "markdownDescription": "Whether to expand the alias. For example, expands `---@alias myType boolean|number` appears as `boolean|number`, otherwise it appears as `myType'.\n",
+            "markdownDescription": "Expandir o no los alias. Por ejemplo, la expansión de `---@alias miTipo boolean|number` aparece como `boolean|number`, caso contrarior, aparece como `miTipo`.\n",
             "scope": "resource",
             "type": "boolean"
         },
         "hover.previewFields": {
             "default": 10,
-            "markdownDescription": "When hovering to view a table, limits the maximum number of previews for fields.",
+            "markdownDescription": "Cuando se ubica el cursor para ver una tabla, fija el máximo numero de previstas para los campos.",
             "scope": "resource",
             "type": "integer"
         },
         "hover.viewNumber": {
             "default": true,
-            "markdownDescription": "Hover to view numeric content (only if literal is not decimal).",
+            "markdownDescription": "Ubica el cursor para ver el contenido numérico (solo si el literal no es decimal).",
             "scope": "resource",
             "type": "boolean"
         },
         "hover.viewString": {
             "default": true,
-            "markdownDescription": "Hover to view the contents of a string (only if the literal contains an escape character).",
+            "markdownDescription": "Ubica el cursor bajo un string para ver su contenido (solo si el literal contiene un caracter de escape).",
             "scope": "resource",
             "type": "boolean"
         },
         "hover.viewStringMax": {
             "default": 1000,
-            "markdownDescription": "The maximum length of a hover to view the contents of a string.",
+            "markdownDescription": "Largo máximo de la información bajo el cursor para ver el contenido de un string.",
             "scope": "resource",
             "type": "integer"
         },
@@ -2835,13 +2835,13 @@
         },
         "language.completeAnnotation": {
             "default": true,
-            "markdownDescription": "(VSCode only) Automatically insert \"---@ \" after a line break following a annotation.",
+            "markdownDescription": "(Solo en VSCode) Inserta automáticamente un \"---@ \" después de un quiebre de línea que sucede a una anotación.",
             "scope": "resource",
             "type": "boolean"
         },
         "language.fixIndent": {
             "default": true,
-            "markdownDescription": "(VSCode only) Fix incorrect auto-indentation, such as incorrect indentation when line breaks occur within a string containing the word \"function\".",
+            "markdownDescription": "(Solo en VSCode) Arregla la auto-indentación incorrecta, como aquella cuando los quiebres de línea ocurren dentro de un string que contengan la palabra \"function\".",
             "scope": "resource",
             "type": "boolean"
         },
@@ -2857,7 +2857,7 @@
         },
         "misc.executablePath": {
             "default": "",
-            "markdownDescription": "Specify the executable path in VSCode.",
+            "markdownDescription": "Especifica la ruta del ejecutable en VSCode.",
             "scope": "resource",
             "type": "string"
         },
@@ -2866,7 +2866,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "[Command line parameters](https://github.com/LuaLS/lua-telemetry-server/tree/master/method) when starting the language server in VSCode.",
+            "markdownDescription": "[Parámetros de la línea de comando](https://github.com/LuaLS/lua-telemetry-server/tree/master/method) para iniciar el servidor de lenguage en VSCode.",
             "scope": "resource",
             "type": "array"
         },
@@ -2880,7 +2880,7 @@
         "nameStyle.config": {
             "additionalProperties": false,
             "default": {},
-            "markdownDescription": "Set name style config.\nRead [formatter docs](https://github.com/CppCXY/EmmyLuaCodeStyle/tree/master/docs) to learn usage.\n",
+            "markdownDescription": "Configuración de estilo para nombres.\nRevise [la documentación del formateador](https://github.com/CppCXY/EmmyLuaCodeStyle/tree/master/docs)\npara aprender más sobre su uso.\n",
             "patternProperties": {
                 ".*": {
                     "type": [
@@ -2932,7 +2932,7 @@
         },
         "runtime.builtin": {
             "additionalProperties": false,
-            "markdownDescription": "Adjust the enabled state of the built-in library. You can disable (or redefine) the non-existent library according to the actual runtime environment.\n\n* `default`: Indicates that the library will be enabled or disabled according to the runtime version\n* `enable`: always enable\n* `disable`: always disable\n",
+            "markdownDescription": "Ajuste de la habilitación de biblioteca interna provista. Puede deshabilitar (o redefinir) las bibliotecas inexistentes de acuerdo al ambiente de ejecución.\n\n* `default`: Indica que la biblioteca será habilitada o deshabilitada de acuerdo a la versión que se ejecuta.\n* `enable`: Habilitada\n* `disable`: Deshabilitada\n",
             "properties": {
                 "basic": {
                     "default": "default",
@@ -3147,7 +3147,7 @@
                 "utf16le",
                 "utf16be"
             ],
-            "markdownDescription": "File encoding. The `ansi` option is only available under the `Windows` platform.",
+            "markdownDescription": "Codificación de archivo. La opción `ansi` solo está disponible en la plataforma `Windows`.",
             "markdownEnumDescriptions": [
                 "TODO: Needs documentation",
                 "TODO: Needs documentation",
@@ -3159,7 +3159,7 @@
         },
         "runtime.meta": {
             "default": "${version} ${language} ${encoding}",
-            "markdownDescription": "Format of the directory name of the meta files.",
+            "markdownDescription": "Formato del nombre del directoria de los archivos meta.",
             "scope": "resource",
             "type": "string"
         },
@@ -3190,7 +3190,7 @@
                 ],
                 "type": "string"
             },
-            "markdownDescription": "Supports non-standard symbols. Make sure that your runtime environment supports these symbols.",
+            "markdownDescription": "Soporte de símbolos no estándar. Asegúrese que la versión de Lua que se ejecuta soporte estos símbolos.",
             "scope": "resource",
             "type": "array"
         },
@@ -3202,18 +3202,18 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "When using `require`, how to find the file based on the input name.\nSetting this config to `?/init.lua` means that when you enter `require 'myfile'`, `${workspace}/myfile/init.lua` will be searched from the loaded files.\nif `runtime.pathStrict` is `false`, `${workspace}/**/myfile/init.lua` will also be searched.\nIf you want to load files outside the workspace, you need to set `Lua.workspace.library` first.\n",
+            "markdownDescription": "Cuando se ocupa un `require`, cómo se encuentra el archivo basado en el nombre de entrada.\n\nAsignar esta configuración a `?/init.lua` significa que cuando se ingresa `require 'myfile'` se busca en `${workspace}/myfile/init.lua` desde los archivos cargados.\nSi `runtime.pathStrict` es `false`, también se busca en `${workspace}/**/myfile/init.lua`.\nSi se desea cargar archivos fuera del espacio de trabajo, se debe asignar `Lua.workspace.library` primero.\n",
             "scope": "resource",
             "type": "array"
         },
         "runtime.pathStrict": {
             "default": false,
-            "markdownDescription": "When enabled, `runtime.path` will only search the first level of directories, see the description of `runtime.path`.",
+            "markdownDescription": "Cuando está habilitado, `runtime.path` sólo buscará en el primer nivel de directorios, vea la descripción de `runtime.path`.",
             "scope": "resource",
             "type": "boolean"
         },
         "runtime.plugin": {
-            "markdownDescription": "Plugin path. Please read [wiki](https://luals.github.io/wiki/plugins) to learn more.",
+            "markdownDescription": "Ruta de plugin. Revise [la wiki](https://luals.github.io/wiki/plugins) para más información.",
             "scope": "resource",
             "type": [
                 "string",
@@ -3221,7 +3221,7 @@
             ]
         },
         "runtime.pluginArgs": {
-            "markdownDescription": "Additional arguments for the plugin.",
+            "markdownDescription": "Argumentos adicionals al plugin.",
             "scope": "resource",
             "type": [
                 "array",
@@ -3231,7 +3231,7 @@
         "runtime.special": {
             "additionalProperties": false,
             "default": {},
-            "markdownDescription": "The custom global variables are regarded as some special built-in variables, and the language server will provide special support\nThe following example shows that 'include' is treated as' require '.\n```json\n\"Lua.runtime.special\" : {\n    \"include\" : \"require\"\n}\n```\n",
+            "markdownDescription": "Las variables globales personalizadas son consideradas variables intrínsecas, y el servidor de lenguage proveerá un soporte especial.\nEl siguiente ejemplo muestra que 'include' es tratado como 'require'.\n```json\n\"Lua.runtime.special\" : {\n    \"include\" : \"require\"\n}\n```\n",
             "patternProperties": {
                 ".*": {
                     "default": "require",
@@ -3259,7 +3259,7 @@
         },
         "runtime.unicodeName": {
             "default": false,
-            "markdownDescription": "Allows Unicode characters in name.",
+            "markdownDescription": "Se permiten los caracteres unicode en los nombres.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3273,7 +3273,7 @@
                 "Lua 5.5",
                 "LuaJIT"
             ],
-            "markdownDescription": "Lua runtime version.",
+            "markdownDescription": "Versión de Lua que se ejecuta.",
             "markdownEnumDescriptions": [
                 "TODO: Needs documentation",
                 "TODO: Needs documentation",
@@ -3303,25 +3303,25 @@
         },
         "semantic.annotation": {
             "default": true,
-            "markdownDescription": "Semantic coloring of type annotations.",
+            "markdownDescription": "Coloración de las anotaciones de tipo.",
             "scope": "resource",
             "type": "boolean"
         },
         "semantic.enable": {
             "default": true,
-            "markdownDescription": "Enable semantic color. You may need to set `editor.semanticHighlighting.enabled` to `true` to take effect.",
+            "markdownDescription": "Habilita la coloración semántica. Puede ser necesario asignar `editor.semanticHighlighting.enabled`  a `true` para que tenga efecto.",
             "scope": "resource",
             "type": "boolean"
         },
         "semantic.keyword": {
             "default": false,
-            "markdownDescription": "Semantic coloring of keywords/literals/operators. You only need to enable this feature if your editor cannot do syntax coloring.",
+            "markdownDescription": "Coloración semántica de palabras clave, literales y operadores. Se necesita habilitar esta característica si su editor no puede hacer coloración sintáctica.",
             "scope": "resource",
             "type": "boolean"
         },
         "semantic.variable": {
             "default": true,
-            "markdownDescription": "Semantic coloring of variables/fields/parameters.",
+            "markdownDescription": "Coloración semántica de variables, campos y parámetros.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3334,7 +3334,7 @@
         },
         "signatureHelp.enable": {
             "default": true,
-            "markdownDescription": "Enable signature help.",
+            "markdownDescription": "Habilita la ayuda de firma.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3350,7 +3350,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Custom words for spell checking.",
+            "markdownDescription": "Palabras extra para el corrector ortográfico.",
             "scope": "resource",
             "type": "array"
         },
@@ -3381,25 +3381,25 @@
         },
         "type.castNumberToInteger": {
             "default": true,
-            "markdownDescription": "Allowed to assign the `number` type to the `integer` type.",
+            "markdownDescription": "Se permite asignar el tipo \"número\" al tipo \"entero\".",
             "scope": "resource",
             "type": "boolean"
         },
         "type.checkTableShape": {
             "default": false,
-            "markdownDescription": "Strictly check the shape of the table.\n",
+            "markdownDescription": "Chequea estrictamente la forma de la tabla.\n",
             "scope": "resource",
             "type": "boolean"
         },
         "type.inferParamType": {
             "default": false,
-            "markdownDescription": "When a parameter type is not annotated, it is inferred from the function's call sites.\n\nWhen this setting is `false`, the type of the parameter is `any` when it is not annotated.\n",
+            "markdownDescription": "Cuando un tipo de parámetro no está anotado, se infiere su tipo de los lugares donde la función es llamada.\n\nCuando esta configuración es `false`, el tipo del parámetro `any` cuando no puede ser anotado.\n",
             "scope": "resource",
             "type": "boolean"
         },
         "type.inferTableSize": {
             "default": 10,
-            "markdownDescription": "Maximum number of table fields analyzed during type inference.",
+            "markdownDescription": "Cantidad máxima de campos de tabla analizados durante la inferencia de tipos.",
             "scope": "resource",
             "type": "integer"
         },
@@ -3411,13 +3411,13 @@
         },
         "type.weakNilCheck": {
             "default": false,
-            "markdownDescription": "When checking the type of union type, ignore the `nil` in it.\n\nWhen this setting is `false`, the `number|nil` type cannot be assigned to the `number` type. It can be with `true`.\n",
+            "markdownDescription": "Cuando se revisa el tipo de un tipo de unión, los `nil` dentro son ignorados.\n\nCuando esta configuración es `false`, el tipo `number|nil` no puede ser asignado al tipo `number`. Solo se puede con `true`.\n",
             "scope": "resource",
             "type": "boolean"
         },
         "type.weakUnionCheck": {
             "default": false,
-            "markdownDescription": "Once one subtype of a union type meets the condition, the union type also meets the condition.\n\nWhen this setting is `false`, the `number|boolean` type cannot be assigned to the `number` type. It can be with `true`.\n",
+            "markdownDescription": "Una vez que un sub-tipo de un tipo de unión satisface la condición, el tipo de unión también satisface la condición.\n\nCuando esta configuración es `false`, el tipo `number|boolean` no puede ser asignado al tipo `number`. Solo se puede con `true`.\n",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3430,21 +3430,21 @@
         },
         "typeFormat.config": {
             "additionalProperties": false,
-            "markdownDescription": "Configures the formatting behavior while typing Lua code.",
+            "markdownDescription": "Configura el comportamiento del formateo mientras se tipea código Lua.",
             "properties": {
                 "auto_complete_end": {
                     "default": "true",
-                    "description": "Controls if `end` is automatically completed at suitable positions.",
+                    "description": "Controla si se completa automáticamente con `end` en las posiciones correspondientes.",
                     "type": "string"
                 },
                 "auto_complete_table_sep": {
                     "default": "true",
-                    "description": "Controls if a separator is automatically appended at the end of a table declaration.",
+                    "description": "Controla si se agrega automáticamente un separador al final de la declaración de una tabla.",
                     "type": "string"
                 },
                 "format_line": {
                     "default": "true",
-                    "description": "Controls if a line is formatted at all.",
+                    "description": "Controla si una línea se formatea",
                     "type": "string"
                 }
             },
@@ -3464,13 +3464,13 @@
         },
         "window.progressBar": {
             "default": true,
-            "markdownDescription": "Show progress bar in status bar.",
+            "markdownDescription": "Muestra la barra de progreso en la barra de estado.",
             "scope": "resource",
             "type": "boolean"
         },
         "window.statusBar": {
             "default": true,
-            "markdownDescription": "Show extension status in status bar.",
+            "markdownDescription": "Muestra el estado de la extensión en la barra de estado.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3503,7 +3503,7 @@
             }
         },
         "workspace.checkThirdParty": {
-            "markdownDescription": "Automatic detection and adaptation of third-party libraries, currently supported libraries are:\n\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
+            "markdownDescription": "Detección y adaptación automática de bibliotecas externas. Actualmente soportadas:\n\n* OpenResty\n* Cocos4.0\n* LÖVE\n* LÖVR\n* skynet\n* Jass\n",
             "scope": "resource",
             "type": [
                 "string",
@@ -3517,13 +3517,13 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Ignored files and directories (Use `.gitignore` grammar).",
+            "markdownDescription": "Directorios y archivos ignorados (se usa la misma gramática que en `.gitignore`)",
             "scope": "resource",
             "type": "array"
         },
         "workspace.ignoreSubmodules": {
             "default": true,
-            "markdownDescription": "Ignore submodules.",
+            "markdownDescription": "Ignora submódulos.",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3532,25 +3532,25 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "In addition to the current workspace, which directories will load files from. The files in these directories will be treated as externally provided code libraries, and some features (such as renaming fields) will not modify these files.",
+            "markdownDescription": "Además de los del espacio de trabajo actual, se cargan archivos de estos directorios. Los archivos en estos directorios serán tratados como bibliotecas con código externo y algunas características (como renombrar campos) no modificarán estos archivos.",
             "scope": "resource",
             "type": "array"
         },
         "workspace.maxPreload": {
             "default": 5000,
-            "markdownDescription": "Max preloaded files.",
+            "markdownDescription": "Máxima pre-carga de archivos.",
             "scope": "resource",
             "type": "integer"
         },
         "workspace.preloadFileSize": {
             "default": 500,
-            "markdownDescription": "Skip files larger than this value (KB) when preloading.",
+            "markdownDescription": "Cuando se pre-carga, se omiten los archivos más grandes que este valor (en KB).",
             "scope": "resource",
             "type": "integer"
         },
         "workspace.useGitIgnore": {
             "default": true,
-            "markdownDescription": "Ignore files list in `.gitignore` .",
+            "markdownDescription": "Ignora los archivos enlistados en `gitignore` .",
             "scope": "resource",
             "type": "boolean"
         },
@@ -3559,7 +3559,7 @@
             "items": {
                 "type": "string"
             },
-            "markdownDescription": "Add private third-party library configuration file paths here, please refer to the built-in [configuration file path](https://github.com/LuaLS/lua-language-server/tree/master/meta/3rd)",
+            "markdownDescription": "Rutas archivos de configuración para bibliotecas externas privadas. Revise [el archivo de configuración](https://github.com/LuaLS/lua-language-server/tree/master/meta/3rd) provisto.",
             "scope": "resource",
             "type": "array"
         }

@@ -44,17 +44,65 @@ export class Addon {
 
     /** Fetch addon info from `info.json` */
     public async fetchInfo() {
-        const path = vscode.Uri.joinPath(this.uri, INFO_FILENAME);
-        const rawInfo = await filesystem.readFile(path);
+        const infoFilePath = vscode.Uri.joinPath(this.uri, INFO_FILENAME);
+        const modulePath = vscode.Uri.joinPath(this.uri, "module");
+
+        const rawInfo = await filesystem.readFile(infoFilePath);
         const info = JSON.parse(rawInfo) as AddonInfo;
 
         this.#displayName = info.name;
+
+        const moduleGit = git.cwd({ path: modulePath.fsPath, root: false });
+
+        let currentVersion = null;
+        let tags: string[] = [];
+
+        await this.getEnabled();
+
+        if (this.#installed) {
+            await git.fetch(["origin", "--prune", "--prune-tags"]);
+            tags = (
+                await moduleGit.tags([
+                    "--sort=-taggerdate",
+                    "--merged",
+                    `origin/${await this.getDefaultBranch()}`,
+                ])
+            ).all;
+
+            const currentTag = await moduleGit
+                .raw(["describe", "--tags", "--exact-match"])
+                .catch((err) => {
+                    return null;
+                });
+            const commitsBehindLatest = await moduleGit.raw([
+                "rev-list",
+                `HEAD..origin/${await this.getDefaultBranch()}`,
+                "--count",
+            ]);
+
+            if (Number(commitsBehindLatest) < 1) {
+                currentVersion = "Latest";
+            } else if (currentTag != "") {
+                currentVersion = currentTag;
+            } else {
+                currentVersion = await moduleGit
+                    .revparse(["--short", "HEAD"])
+                    .catch((err) => {
+                        localLogger.warn(
+                            `Failed to get current hash for ${this.name}: ${err}`
+                        );
+                        return null;
+                    });
+            }
+        }
 
         return {
             name: info.name,
             description: info.description,
             size: info.size,
             hasPlugin: info.hasPlugin,
+            tags: tags,
+            version: currentVersion,
         };
     }
 
@@ -85,14 +133,47 @@ export class Addon {
             .then((message) => localLogger.debug(message));
     }
 
+    public async getDefaultBranch() {
+        // Get branch from .gitmodules if specified
+        const targetBranch = await git.raw(
+            "config",
+            "-f",
+            ".gitmodules",
+            "--get",
+            `submodule.addons/${this.name}/module.branch`
+        );
+        if (targetBranch) {
+            return targetBranch;
+        }
+
+        // Fetch default branch from remote
+        const modulePath = vscode.Uri.joinPath(this.uri, "module");
+        const result = (await git
+            .cwd({ path: modulePath.fsPath, root: false })
+            .remote(["show", "origin"])) as string;
+        const match = result.match(/HEAD branch: (\w+)/);
+
+        return match![1];
+    }
+
+    public async pull() {
+        const modulePath = vscode.Uri.joinPath(this.uri, "module");
+
+        return await git.cwd({ path: modulePath.fsPath, root: false }).pull();
+    }
+
+    public async checkout(obj: string) {
+        const modulePath = vscode.Uri.joinPath(this.uri, "module");
+        return git
+            .cwd({ path: modulePath.fsPath, root: false })
+            .checkout([obj]);
+    }
+
     /** Check whether this addon is enabled, given an array of enabled library paths.
      * @param libraryPaths An array of paths from the `Lua.workspace.library` setting.
      */
     public checkIfEnabled(libraryPaths: string[]) {
-        const regex = new RegExp(
-            `[/\\\\]+sumneko.lua[/\\\\]+addonManager[/\\\\]+addons[/\\\\]+${this.name}`,
-            "g"
-        );
+        const regex = new RegExp(`${this.name}\/module\/library`, "g");
 
         const index = libraryPaths.findIndex((path) => regex.test(path));
         return index !== -1;
@@ -115,15 +196,18 @@ export class Addon {
         );
 
         const moduleURI = vscode.Uri.joinPath(this.uri, "module");
-        this.#installed =
-            (await filesystem.exists(moduleURI)) &&
-            (await filesystem.readDirectory(moduleURI, { recursive: false }))
-                .length > 0;
+
+        const exists = await filesystem.exists(moduleURI);
+        const empty = await filesystem.empty(moduleURI);
+        this.#installed = exists && !empty;
 
         return folderStates;
     }
 
-    public async enable(folder: vscode.WorkspaceFolder) {
+    public async enable(
+        folder: vscode.WorkspaceFolder,
+        installLocation: vscode.Uri
+    ) {
         const librarySetting = ((await getConfig(
             LIBRARY_SETTING,
             folder.uri
@@ -156,7 +240,11 @@ export class Addon {
         }
 
         // Apply addon settings
-        const libraryUri = vscode.Uri.joinPath(this.uri, "module", "library");
+        const libraryPath = vscode.Uri.joinPath(
+            this.uri,
+            "module",
+            "library"
+        ).path.replace(installLocation.path, "${addons}");
 
         const configValues = await this.getConfigurationFile();
 
@@ -165,7 +253,7 @@ export class Addon {
                 {
                     action: "add",
                     key: LIBRARY_SETTING,
-                    value: filesystem.unixifyPath(libraryUri),
+                    value: libraryPath,
                     uri: folder.uri,
                 },
             ]);
@@ -190,7 +278,7 @@ export class Addon {
         )) ?? []) as string[];
 
         const regex = new RegExp(
-            `[/\\\\]+sumneko.lua[/\\\\]+addonManager[/\\\\]+addons[/\\\\]+${this.name}`,
+            `addons}?[/\\\\]+${this.name}[/\\\\]+module[/\\\\]+library`,
             "g"
         );
         const index = librarySetting.findIndex((path) => regex.test(path));
@@ -237,14 +325,21 @@ export class Addon {
     }
 
     public async uninstall() {
-        for (const folder of vscode.workspace.workspaceFolders) {
+        for (const folder of vscode.workspace.workspaceFolders ?? []) {
             await this.disable(folder, true);
         }
-        const moduleURI = vscode.Uri.joinPath(this.uri, "module");
-        await filesystem.deleteFile(moduleURI, {
-            recursive: true,
-            useTrash: false,
+        const files =
+            (await filesystem.readDirectory(
+                vscode.Uri.joinPath(this.uri, "module"),
+                { depth: 1 }
+            )) ?? [];
+        files.map((f) => {
+            return filesystem.deleteFile(f.uri, {
+                recursive: true,
+                useTrash: false,
+            });
         });
+        await Promise.all(files);
         localLogger.info(`Uninstalled ${this.name}`);
         this.#installed = false;
         this.setLock(false);
@@ -254,9 +349,10 @@ export class Addon {
     public async toJSON() {
         await this.getEnabled();
 
-        const { name, description, size, hasPlugin } = await this.fetchInfo();
+        const { name, description, size, hasPlugin, tags, version } =
+            await this.fetchInfo();
         const enabled = this.#enabled;
-        const installTimestamp = (await git.log()).latest.date;
+        const installTimestamp = (await git.log()).latest?.date;
         const hasUpdate = this.#hasUpdate;
 
         return {
@@ -270,6 +366,8 @@ export class Addon {
             hasUpdate,
             processing: this.#processing,
             installed: this.#installed,
+            tags,
+            version,
         };
     }
 

@@ -20,7 +20,7 @@ class AddonManager {
         try {
             await git.fetch();
             await git.pull();
-        } catch (e) {
+        } catch (e: any) {
             const message =
                 "Failed to fetch addons! Please check your connection to GitHub.";
             localLogger.error(message, { report: false });
@@ -31,8 +31,15 @@ class AddonManager {
             });
         }
 
-        const addons = await filesystem.readDirectory(installLocation);
-
+        const ignoreList = [".DS_Store"];
+        let addons = await filesystem.readDirectory(installLocation);
+        if (addons) {
+            addons = addons.filter((a) => !ignoreList.includes(a.name));
+        }
+        if (!addons || addons.length === 0) {
+            localLogger.warn("No addons found in installation folder");
+            return;
+        }
         for (const addon of addons) {
             this.addons.set(addon.name, new Addon(addon.name, addon.uri));
             localLogger.verbose(`Found ${addon.name}`);
@@ -50,7 +57,7 @@ class AddonManager {
 
     public unlockAddon(name: string) {
         const addon = this.addons.get(name);
-        return addon.setLock(false);
+        return addon?.setLock(false);
     }
 }
 

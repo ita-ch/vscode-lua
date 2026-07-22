@@ -1,5 +1,446 @@
 # changelog
 
+## Unreleased
+<!-- Add all new changes here. They will be moved under a version at release -->
+
+## 3.18.2
+* `CHG` `duplicate-set-field` diagnostic now supports linked suppression: when any occurrence of a duplicate field is suppressed with `---@diagnostic disable` or `---@diagnostic disable-next-line`, all warnings for that field name will be suppressed
+* `REVERT` Reverted commit 1dd194da537df432f97295ea167dfef19acd7a4e which fix for type inference in and/or idioms. The circular dependency guard introduced issues with type narrowing in if-blocks where variables are reassigned (e.g., `if x then x = 0 end` would lose type information from the if-block in subsequent code). This needs a more refined solution to balance fixing circular dependencies without breaking type narrowing.
+
+## 3.18.1
+`2026-04-08`
+* `FIX` Allow `global` to be used as an identifier in Lua 5.5 when it is not part of a `global` declaration
+
+## 3.18.0
+`2026-04-03`
+* `CHG` Always track symbol-links
+* `CHG` Modified the `ResolveRequire` function to pass the source URI as a third argument.
+* `CHG` Improved the output of test failures during development
+* `FIX` Fix type inference for `x == nil and "default" or x` idiom [#2236](https://github.com/LuaLS/lua-language-server/issues/2236)
+* `FIX` Fix type loss for assignments inside `if`/`for` blocks due to circular dependency in tracer [#2374](https://github.com/LuaLS/lua-language-server/issues/2374) [#2494](https://github.com/LuaLS/lua-language-server/issues/2494)
+* `FIX` Resolve generic class method return types for `@param self list<T>` pattern
+* `FIX` Fix `ipairs(self)` type resolution in generic class methods
+* `FIX` Fix double angle brackets in generic sign display (`list<<T>>` -> `list<T>`)
+* `FIX` Fix nil crash in `getParentClass` for `doc.field` without class
+* `FIX` Fix type inference for bitwise operators (`<<`, `>>`, `&`, `|`, `~`) on integer variables
+* `FIX` Fix constant value computation for chained bitwise expressions in hover tooltips
+* `FIX` Support Lua 5.5 prefix local attributes such as `local <close>x` and `local <const>x`
+* `FIX` Correct `os` and `io` meta return types.
+
+## 3.17.1
+`2026-01-20`
+* `FIX` Fixed a CPU usage issue again
+
+## 3.17.0
+`2026-01-19`
+* `NEW` Support `fun<T>` syntax for inline generic function types in `@field` and `@type` annotations [#1170](https://github.com/LuaLS/lua-language-server/issues/1170)
+* `FIX` Generic class inheritance with type arguments now works correctly (e.g., `class Bar: Foo<integer>`) [#1929](https://github.com/LuaLS/lua-language-server/issues/1929)
+* `FIX` Method return types on generic classes now resolve correctly (e.g., `Box<string>:getValue()` returns `string`) [#1863](https://github.com/LuaLS/lua-language-server/issues/1863)
+* `FIX` Self-referential generic classes no longer cause infinite expansion in hover display [#1853](https://github.com/LuaLS/lua-language-server/issues/1853)
+* `FIX` Generic type parameters now work in `@overload` annotations [#723](https://github.com/LuaLS/lua-language-server/issues/723)
+* `FIX` Methods with `@generic T` and `@param self T` now correctly resolve return type to the receiver's concrete type (e.g., `List<number>:identity()` returns `List<number>`) [#1000](https://github.com/LuaLS/lua-language-server/issues/1000)
+* `FIX` Fixed a CPU scheduling bug that prevented the full utilization of high-performance CPUs.
+* `FIX` convert all keys to string in `--check`
+
+## 3.16.4
+`2025-12-25`
+* `FIX` (VSCode) Broken `view document`
+* `FIX` `for .. in` should only treat the first variable as const
+
+## 3.16.3
+`2025-12-23`
+* `CHG` Upgraded to Lua 5.5, memory usage has been reduced by ~10%
+
+## 3.16.2
+`2025-12-18`
+* `NEW` Added `completion.maxSuggestCount` which lets you increase the amount of fields to analyze before requiring more specific input
+* `NEW` `view document` supports `Lua 5.5`
+* `CHG` Omit parameter hints when the argument name matches
+* `FIX` Fix a typo in `no-unknown` diagnostic message
+* `FIX` Autodoc generation so it does not include documentation for builtin Lua language features
+* `FIX` Fix incorrect version in `view document`
+* `FIX` Fix incorrect version of builtin variables
+
+## 3.16.1
+`2025-12-8`
+* `FIX` Broken in Linux
+* `FIX` Fix diagnostic completions incorrect textEdit.finish
+* `FIX` Comparison crash in doc export CLI [#3111](https://github.com/LuaLS/lua-language-server/issues/3111)
+
+## 3.16.0
+`2025-12-2`
+* `NEW` Support Lua 5.5
+* `CHG` Doc output now contains file paths for `@alias` and `@enum` types
+* `CHG` Rename configuration option `Lua.diagnostics.disableScheme` to `Lua.diagnostics.validScheme` and improve its description. Now it enables diagnostics for Lua files that use the specified scheme.
+* `FIX` Plugin virtual comment style and behavior issues
+* `FIX` Incorrect generation of function signatures with tuple-parameters
+* `FIX` Typos in a few error messages.
+* `FIX` Incorrect inject-field message for extra table field in exact class
+* `FIX` adds the `|lambda|` operator to the `Lua.runtime.nonstandardSymbol` configuration template, which allows the use of that option. Previously, support for it existed in the parser, but we could not actually use the option because it is not recognised in the configuration.
+* `FIX` Typed `@field` (eg `---@field [string] boolean`) should not override other defined field [#2171](https://github.com/LuaLS/lua-language-server/issues/2171), [#2711](https://github.com/LuaLS/lua-language-server/issues/2711)
+* `FIX` don't return empty hover doc when luals failed to find definition
+* `FIX` Prevent stack overflow when attempting to resolve function return values. [#3246](https://github.com/LuaLS/lua-language-server/issues/3246)
+* `FIX` Fix type annotations for `string.buffer` module
+
+## 3.15.0
+`2025-6-25`
+* `NEW` Support custom addons path for enhanced editor flexibility
+* `NEW` Add `Lua.type.maxUnionVariants` which can be set to limit how many union variants are checked against
+* `CHG` Add missing locale
+* `CHG` Fulfill zh-tw translations
+* `FIX` Cannot debug in Linux due to lua-debug expecting host process to have lua54 symbols available
+* `FIX` Support hex color codes with `#` in `textDocument/documentColor`
+* `FIX` Prevent class methods from triggering missing-fields diagnostics
+* `FIX` Updates the EmmyLuaCodeStyle submodule reference to a newer commit, ensuring compatibility with GCC 15
+* `FIX` Large unions will no longer erroneously fail to match later variants
+
+## 3.14.0
+`2025-4-7`
+* `NEW` locale `es-419`, thanks [Felipe Lema](https://codeberg.org/FelipeLema)
+* `FIX` prevent unnecessary edits by LSP formatting when content did not change
+* `FIX` return no completions if completion is disabled
+* `FIX` optimized the performance of large literal tables (e.g., configuration tables)
+
+## 3.13.9
+`2025-3-13`
+* `CHG` remove the limit for analyzing the literal table
+
+## 3.13.8
+`2025-3-12`
+* `CHG` when analyzing the literal table, only the first 100 items are analyzed at most
+* `CHG` when checking type matching for union types, only the first 100 items are checked at most
+* `FIX` Update `--help` message.
+* `FIX` --check now respects ignoreDir setting
+* `FIX` incorrect argument skip pattern for `--check_out_path=`, which incorrectly skips the next argument
+
+## 3.13.7
+`2025-3-10`
+* `NEW` CLI: added `--help`.
+* `CHG` default path for `--doc_out_path` is the current directory
+* `FIX` incorrect argument skip pattern for `--check_out_path=`, which incorrectly skips the next argument
+* `FIX` incorrect error message for `--doc_update`.
+* `FIX` reimplement section `luals.config` in file doc.json
+* `FIX` incorrect file names in file doc.json
+* `FIX` remove extra `./` path prefix in the check report when using `--check=.`
+* `FIX` Narrowing of types with literal fields: [#3056](https://github.com/LuaLS/lua-language-server/issues/3056), [#3089](https://github.com/LuaLS/lua-language-server/issues/3089)
+* `FIX` correct lua version of `math.ult` and `math.type`
+* `FIX` incorrect links for `pattern` in `string` methods
+* `FIX` fix type annotations for bit module
+* `FIX` Another regression related to type narrow and generic param introduced since `v3.10.1` [#3087](https://github.com/LuaLS/lua-language-server/issues/3087)
+
+## 3.13.6
+`2025-2-6`
+* `NEW` `---@class` supports attribute `partial`, which will not check missing inherited fields [#3023](https://github.com/LuaLS/lua-language-server/issues/3023)
+  ```lua
+  ---@class Config
+  ---@field a number
+
+  ---@class (partial) Config.P: Config
+  ---@field b number
+
+  ---@type Config.P[]
+  local cfgs = {}
+  cfgs[1] = { b = 1 } -- no warning
+  cfgs[2] = {}        -- only warns missing `b`
+  ```
+  This enables the previous missing field check behavior before [#2970](https://github.com/LuaLS/lua-language-server/issues/2970)
+* `NEW` Added variable substitution support for vscode's `${workspaceFolder:x}` when resolving path placeholders [#2987](https://github.com/LuaLS/lua-language-server/issues/2987)
+* `NEW` Added `--check_format=json|pretty` for use with `--check` to output diagnostics in a human readable format.
+* `NEW` Test CLI: `--name=<testname>` `-n=<testname>`: run specify unit test
+* `CHG` Generic pattern now supports definition after capture and optional, union, array [#3014](https://github.com/LuaLS/lua-language-server/issues/3014) [#3031](https://github.com/LuaLS/lua-language-server/pull/3031)
+  ```lua
+  ---@generic T
+  ---@param t `T`.Cat?
+  ---@return T?
+  local function f(t) end
+
+  local t = f('Smile') --> t is `(Smile.Cat)?`
+  ```
+* `FIX` Fixed the error that the configuration file pointed to by the `--configpath` option was not read and loaded.
+* `FIX` Don't truncate any output when running in `--doc` mode [#3049](https://github.com/LuaLS/lua-language-server/issues/3049)
+* `FIX` Generic return can be optional.
+* `FIX` Fixed the comment calculating in docs `---@param a string?Comment` - now its `Comment` instead of `omment` [#3028](https://github.com/LuaLS/lua-language-server/pull/3028)
+* `FIX` Fixed cannot bind variables using tail comment `@class` [#2673](https://github.com/LuaLS/lua-language-server/issues/2673)
+* `FIX` Fixed missing field completion for generic class object [#2196](https://github.com/LuaLS/lua-language-server/issues/2196) [#2945](https://github.com/LuaLS/lua-language-server/issues/2945) [#3041](https://github.com/LuaLS/lua-language-server/issues/3041)
+
+## 3.13.5
+`2024-12-20`
+* `NEW` Setting: `Lua.hint.awaitPropagate`: When enabled, `--@async` propagates to the caller.
+* `CHG` Add server version information to `initialize` response [#2996](https://github.com/LuaLS/lua-language-server/pull/2996)
+* `CHG` If the `---@field` of the same name has a type of `fun`, the `duplicate-doc-field` check will not be performed.
+* `FIX` Incorrect infer for function array annotation on tables [#2367](https://github.com/LuaLS/lua-language-server/issues/2367)
+
+## 3.13.4
+`2024-12-13`
+* `CHG` Can adjust the level of detail of Hover (VSCode)
+
+## 3.13.3
+`2024-12-6`
+* `CHG` Update Love2d version
+* `CHG` Improve type infer of `table.unpack` and `unpack`
+* `FIX` `missing-fields` diagnostic now warns about missing inherited fields
+* `FIX` Incorrect `param-type-mismatch` diagnostic for optional fields
+
+## 3.13.2
+`2024-11-21`
+* `CHG` fulfill zh-cn translations
+* `FIX` Add missing `errs ~= nil` checks to script/vm/type checkTableShape
+
+## 3.13.1
+`2024-11-13`
+* `FIX` Incorrect type check in some case
+
+## 3.13.0
+`2024-11-13`
+* `NEW` Setting: `Lua.type.inferTableSize`: A Small Table array can be infered
+* `NEW` Add custom repository support for addonManager. New configuration setting: `Lua.addonManager.repositoryBranch` and `Lua.addonManager.repositoryPath`
+* `NEW` Infer function parameter types when the function is used as an callback argument and that argument has a `fun()` annotation. Enable with `Lua.type.inferParamType` setting. [#2695](https://github.com/LuaLS/lua-language-server/pull/2695)
+  ```lua
+  ---@param callback fun(a: integer)
+  function register(callback) end
+
+  local function callback(a) end  --> a: integer
+  register(callback)
+  ```
+* `CHG` Basic types allow contravariance
+  ```lua
+  ---@class int32: integer
+
+  ---@type integer
+  local n
+
+  ---@type int32
+  local a = n
+  ```
+* `FIX` Improve type narrow with **literal alias type** during completion and signature help
+
+## 3.12.0
+`2024-10-30`
+* `NEW` Support importing `enum` through class name suffix matching in quick fixes, allowing the import of `enum` from `table.table.enum; return table`.
+* `NEW` Support limited multiline annotations
+  ```lua
+  ---@type {
+  --- x: number,
+  --- y: number,
+  --- z: number,
+  ---}
+  local point --> local point: { x: number, y: number, z: number }
+  ```
+* `FIX` A regression related to type narrow and generic param introduced since `v3.10.1`
+* `FIX` Parse storagePath to improve reliability of resolving ${addons} placeholder
+* `FIX` Reference should also look in tablefield
+* `FIX` Determine that the index of `{...}` is an integer when iterating
+
+## 3.11.1
+`2024-10-9`
+* `FIX` Fixed an issue preventing to set the locale to Japanese
+* `FIX` Preserve newlines between function comment and @see
+* `FIX` Accept storagePath option from client to resolve addon directory not found
+
+## 3.11.0
+`2024-9-30`
+* `NEW` Added support for Japanese locale
+* `NEW` Infer function parameter types when overriding the same-named class function in an instance of that class [#2158](https://github.com/LuaLS/lua-language-server/issues/2158)
+* `NEW` Types with literal fields can be narrowed.
+* `NEW` Reference addons installed via the addon manager with `${addons}` [#2866](https://github.com/LuaLS/lua-language-server/pull/2866).
+* `NEW` Support using `---@class` on `rawset(_G, ...)` to annotate the created global variable [#2862](https://github.com/LuaLS/lua-language-server/issues/2862)
+* `NEW` Settings:
+  + `Lua.language.fixIndent`
+  + `Lua.language.completeAnnotation`
+* `FIX` Eliminate floating point error in test benchmark output
+* `FIX` Remove luamake install from make scripts
+* `FIX` Incorrect `table` type injected to the global variable created by `rawset(_G, ...)` [#2863](https://github.com/LuaLS/lua-language-server/issues/2863)
+
+## 3.10.6
+`2024-9-10`
+* `NEW` Custom documentation exporter
+* `NEW` Setting: `Lua.docScriptPath`: Path to a script that overrides `cli.doc.export`, allowing user-specified documentation exporting.
+* `NEW` Infer the parameter types of a same-named function in the subclass based on the parameter types in the superclass function.
+* `FIX` Fix `VM.OnCompileFunctionParam` function in plugins
+* `FIX` Lua 5.1: fix incorrect warning when using setfenv with an int as first parameter
+* `FIX` Improve type narrow by checking exact match on literal type params
+* `FIX` Correctly list enums for function overload arguments [#2840](https://github.com/LuaLS/lua-language-server/pull/2840)
+* `FIX` Incorrect function params' type infer when there is only `@overload` [#2509](https://github.com/LuaLS/lua-language-server/issues/2509) [#2708](https://github.com/LuaLS/lua-language-server/issues/2708) [#2709](https://github.com/LuaLS/lua-language-server/issues/2709)
+* `FIX` Only call workspace/configuration when available [#981](https://github.com/LuaLS/lua-language-server/issues/981), [#2318](https://github.com/LuaLS/lua-language-server/issues/2318), [2336](https://github.com/LuaLS/lua-language-server/issues/2336) [#2843](https://github.com/LuaLS/lua-language-server/pull/2843)
+
+## 3.10.5
+`2024-8-19`
+* `NEW` using `enum (partial)`, it suggests all fields with the same `enum` type rather than just the fields from the current table.
+* `NEW` When using `enum["<key>" or <index>]`, undefined fields will raise an 'undefined' error.
+* `FIX` Renaming files in the directory leads to the auto-correction in "require" adding extra characters.
+* `FIX` Performance issue
+* `FIX` Fix incorrect indent fixing for `for`
+
+## 3.10.4
+`2024-8-16`
+* `NEW` Setting: `Lua.type.checkTableShape`: Add matching checks between the shape of tables and classes, during type checking. [#2768](https://github.com/LuaLS/lua-language-server/pull/2768)
+* `NEW` `undefined-field` supports `enum`
+* `CHG` Show enumed table as `enum X` instead of `table`
+* `FIX` Error `attempt to index a nil value` when `Lua.hint.semicolon == 'All'` [#2788](https://github.com/LuaLS/lua-language-server/issues/2788)
+* `FIX` Incorrect LuaCats parsing for `"'"`
+* `FIX` Incorrect indent fixings
+
+## 3.10.3
+`2024-8-8`
+* `FIX` Memory leak with `---@enum(partical)`
+
+## 3.10.2
+`2024-8-7`
+* `NEW` Add support for binary metamethod on right operand [#2777](https://github.com/LuaLS/lua-language-server/pull/2777)
+* `FIX` Incorrect indentation fixing in some case
+
+## 3.10.1
+`2024-8-2`
+* `FIX` Runtime error
+* `FIX` Disable indentation fixing for Non-VSCode
+
+## 3.10.0
+`2024-8-1`
+* `NEW` Add postfix snippet for `unpack`
+* `NEW` Add support for lambda style functions, `|paramList| expr` is syntactic sugar for `function(paramList) return expr end`
+* `NEW` Added lua regular expression support for `Lua.doc.<scope>Name` [#2753](https://github.com/LuaLS/lua-language-server/pull/2753)
+* `NEW` You can now click on "References" in CodeLen to display the reference list（VSCode）
+* `NEW` Improved behavior for inserting new lines:
+  + When inside an annotation, an annotation tag will be added at the beginning of the line (VSCode).
+  + When between `function () end` or similar constructs, the format will be adjusted to a more reasonable one (VSCode) and leading/trailing spaces will be removed (generic).
+  + Attempts to semantically fix improper indentation (generic).
+* `CHG` Improve performance of multithreaded `--check` and `undefined-field` diagnostic
+* `CHG` Change spacing of parameter inlay hints to match other LSPs, like `rust-analyzer`
+* `FIX` `diagnostics.severity` defaulting to "Warning" when run using `--check` [#2730](https://github.com/LuaLS/lua-language-server/issues/2730)
+* `FIX` Respect `completion.showParams` config for local function completion
+* `FIX` Addons can now self-recommend as expected. Fixed by correcting the `wholeMatch` function
+* `FIX` Now correctly evaluates the visibility of fields in a class when they are defined directly in the object. use for completion and invisible dianostic. [#2752](https://github.com/LuaLS/lua-language-server/issues/2752)
+* `FIX` Bad triggering of the `inject-field` diagnostic, when the fields are declared at the creation of the object [#2746](https://github.com/LuaLS/lua-language-server/issues/2746)
+* `FIX` Inconsistent type narrow behavior of function call args [#2758](https://github.com/LuaLS/lua-language-server/issues/2758)
+* `FIX` Improve the `missing-fields` logic to be able to correctly handle classes defined several times [#22770](https://github.com/LuaLS/lua-language-server/pull/2770)
+* `FIX` Typos in annotation descriptions
+* `FIX` incorrect `CompletionItemKind` for postfix snippets [#2773](https://github.com/LuaLS/lua-language-server/pull/2773)
+
+## 3.9.3
+`2024-6-11`
+* `FIX` Sometimes providing incorrect autocompletion when chaining calls
+
+## 3.9.2
+`2024-6-6`
+* `NEW` Reference workspace symbols in comments using `[some text](lua://symbolName)` syntax
+* `FIX` Don't do diagnostics when the workspace is not ready
+* `FIX` Autocompletion for enum values ​​is not available in some cases
+
+## 3.9.1
+`2024-5-14`
+* revert extension runtime
+
+## 3.9.0
+`2024-5-11`
+* `NEW` goto implementation
+* `NEW` narrow the function prototype based on the parameter type
+  ```lua
+  ---@overload fun(a: boolean): A
+  ---@overload fun(a: number): B
+  local function f(...) end
+
+  local r1 = f(true) --> r1 is `A`
+  local r2 = f(10) --> r2 is `B`
+  ```
+
+## 3.8.3
+`2024-4-23`
+* `FIX` server may crash when the workspace is using a non-English path.
+
+## 3.8.2
+`2024-4-23`
+* This is a fake version only for the new version of VSCode, with a core of 3.8.0.
+
+## 3.8.1
+`2024-4-23`
+* This is a fake version only for the old version of VSCode, with a core of `3.7.4`. Starting from the next minor version, the version requirement for VSCode will be raised to prevent users still using the old version of VSCode from updating to the new version and experiencing compatibility issues.
+
+## 3.8.0
+`2024-4-22`
+* `NEW` supports tuple type (@[lizho])
+  ```lua
+  ---@type [string, number, boolean]
+  local t
+
+  local x = t[1] --> x is `string`
+  local y = t[2] --> y is `number`
+  local z = t[3] --> z is `boolean`
+  ```
+* `NEW` generic pattern (@[fesily])
+  ```lua
+  ---@generic T
+  ---@param t Cat.`T`
+  ---@return T
+  local function f(t) end
+
+  local t = f('Smile') --> t is `Cat.Smile`
+  ```
+* `NEW` alias and enums supports attribute `partial`
+  ```lua
+  ---@alias Animal Cat
+
+  ---@alias(partial) Animal Dog
+
+  ---@type Animal
+  local animal --> animal is `Cat|Dog` here
+  ```
+
+  ```lua
+  ---@enum(key) ErrorCodes
+  local codes1 = {
+      OK = 0,
+      ERROR = 1,
+      FATAL = 2,
+  }
+
+  ---@enum(key, partial) ErrorCodes
+  local codes2 = {
+      WARN = 3,
+      INFO = 4,
+  }
+
+  ---@type ErrorCodes
+  local code
+
+  code = 'ERROR' --> OK
+  code = 'WARN'  --> OK
+
+  ```
+* `NEW` plugin: add `OnTransFormAst` interface (@[fesily])
+* `NEW` plugin: add `OnNodeCompileFunctionParam` interface (@[fesily])
+* `NEW` plugin: add `ResolveRequire` interface (@[Artem Dzhemesiuk])
+* `NEW` plugin: support multi plugins (@[fesily])
+  + setting: `Lua.runtime.plugin` can be `string|string[]`
+  + setting: `Lua.runtime.pluginArgs` can be `string[]|table<string, string>`
+* `NEW` CLI: `--doc` add option `--doc_out_path <PATH>` (@[Andreas Matthias])
+* `NEW` CLI: `--doc_update`, update an existing `doc.json` without using `--doc` again (@[Andreas Matthias])
+* `NEW` CLI: `--trust_all_plugins`, this is potentially unsafe for normal use and meant for usage in CI environments only (@[Paul Emmerich])
+* `CHG` CLI: `--check` will run plugins (@[Daniel Farrell])
+* `FIX` diagnostic: `discard-returns` not works in some blocks (@clay-golem)
+* `FIX` rename in library files
+
+## 3.7.4
+`2024-1-5`
+* `FIX` rename to unicode with `Lua.runtime.unicodeName = true`
+
+## 3.7.3
+`2023-11-14`
+* `FIX` can not infer arg type in some cases.
+
+## 3.7.2
+`2023-11-9`
+* `FIX` [#2407]
+
+[#2407]: https://github.com/LuaLS/lua-language-server/issues/2407
+
+## 3.7.1
+`2023-11-7`
+* `FIX` [#2299]
+* `FIX` [#2335]
+
+[#2299]: https://github.com/LuaLS/lua-language-server/issues/2299
+[#2335]: https://github.com/LuaLS/lua-language-server/issues/2335
+
 ## 3.7.0
 `2023-8-24`
 * `NEW` support `---@type` and `--[[@as]]` for return statement
@@ -12,7 +453,7 @@
     Cat = 1,
     Dog = 2,
   }
-  
+
   ---@param animal userdata
   ---@param atp AnimalType
   ---@return boolean
@@ -1941,3 +2382,12 @@ f( -- view comments of `1` and `2` in completion
 `2020-11-9`
 
 * `NEW` implementation, NEW start!
+
+<!-- contributors -->
+[lizho]: (https://github.com/lizho)
+[fesily]: (https://github.com/fesily)
+[Andreas Matthias]: (https://github.com/AndreasMatthias)
+[Daniel Farrell]: (https://github.com/danpf)
+[Paul Emmerich]: (https://github.com/emmericp)
+[Artem Dzhemesiuk]: (https://github.com/zziger)
+[clay-golem]: (https://github.com/clay-golem)

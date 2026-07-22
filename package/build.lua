@@ -1,9 +1,9 @@
 local json = require 'json-beautify'
 
-local VERSION = "3.7.0"
+local VERSION = "3.18.2"
 
-local package = require 'package.package'
 local fsu     = require 'fs-utility'
+local package = json.decode(fsu.loadFile(ROOT / 'package.json'))
 
 package.version = VERSION
 -- package.__metadata = {
@@ -16,6 +16,17 @@ package.version = VERSION
 --     isPreReleaseVersion = false,
 --     preRelease = false,
 -- }
+package.contributes.configuration = {
+    title = 'Lua',
+    type = 'object',
+    properties = require 'server.tools.configuration',
+}
+package.contributes.semanticTokenScopes = {
+    {
+        language = 'lua',
+        scopes = require 'package.semanticTokenScope',
+    }
+}
 
 local encodeOption = {
     newline = '\r\n',

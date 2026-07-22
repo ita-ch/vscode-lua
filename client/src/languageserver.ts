@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
+import * as LSP from 'vscode-languageserver-protocol';
 import {
     workspace as Workspace,
     ExtensionContext,
@@ -22,10 +23,11 @@ import {
 } from 'vscode-languageclient/node';
 
 export let defaultClient: LuaClient | null;
+let outputChannel: vscode.OutputChannel | undefined;
 
 function registerCustomCommands(context: ExtensionContext) {
     context.subscriptions.push(Commands.registerCommand('lua.config', (changes) => {
-        const propMap: Map<string, Map<string, unknown>> = new Map();
+        const propMap: Record<string, Record<string, unknown>> = {};
 
         for (const data of changes) {
             const config = Workspace.getConfiguration(undefined, Uri.parse(data.uri));
@@ -42,8 +44,11 @@ function registerCustomCommands(context: ExtensionContext) {
                 continue;
             }
             if (data.action === 'prop') {
-                if (!propMap[data.key]) {
-                    propMap[data.key] = config.get(data.key);
+                if (!(data.key in propMap)) {
+                    let prop = config.get(data.key);
+                    if (typeof prop === 'object' && prop !== null) {
+                        propMap[data.key] = prop as Record<string, unknown>;
+                    }
                 }
                 propMap[data.key][data.prop] = data.value;
                 config.update(data.key, propMap[data.key], data.global);
@@ -71,17 +76,45 @@ function registerCustomCommands(context: ExtensionContext) {
         if (!output) {
             return;
         }
-        defaultClient.client.sendRequest(ExecuteCommandRequest.type, {
+        defaultClient.client?.sendRequest(ExecuteCommandRequest.type, {
             command: 'lua.exportDocument',
             arguments: [output.toString()],
         });
     }));
 
     context.subscriptions.push(Commands.registerCommand('lua.reloadFFIMeta', async () => {
-        defaultClient.client.sendRequest(ExecuteCommandRequest.type, {
+        defaultClient?.client?.sendRequest(ExecuteCommandRequest.type, {
             command: 'lua.reloadFFIMeta',
         })
     }))
+
+    context.subscriptions.push(Commands.registerCommand('lua.startServer', async () => {
+        deactivate();
+        createClient(context);
+    }));
+
+    context.subscriptions.push(Commands.registerCommand('lua.stopServer', async () => {
+        deactivate();
+    }));
+
+    context.subscriptions.push(Commands.registerCommand('lua.showReferences', (uri: string, position: Record<string, number>, locations: any[]) => {
+        vscode.commands.executeCommand(
+            'editor.action.showReferences',
+            vscode.Uri.parse(uri),
+            new vscode.Position(position.line, position.character),
+            locations.map((value) => {
+                return new vscode.Location(
+                    vscode.Uri.parse(value.uri as any as string),
+                    new vscode.Range(
+                        value.range.start.line,
+                        value.range.start.character,
+                        value.range.end.line,
+                        value.range.end.character,
+                    ),
+                );
+            })
+        );
+    }));
 }
 
 /** Creates a new {@link LuaClient} and starts it. */
@@ -91,16 +124,25 @@ export const createClient = (context: ExtensionContext) => {
 }
 
 class LuaClient extends Disposable {
-    public client: LanguageClient;
+    public client: LanguageClient | undefined;
     private disposables = new Array<Disposable>();
     constructor(
         private context: ExtensionContext,
         private documentSelector: DocumentSelector
     ) {
-        super(() => this.dispose());
+        super(() => {
+            for (const disposable of this.disposables) {
+                disposable.dispose();
+            }
+        });
     }
 
     async start() {
+        // 复用或创建输出通道
+        if (!outputChannel) {
+            outputChannel = vscode.window.createOutputChannel("Lua", { log: true });
+        }
+
         // Options to control the language client
         const clientOptions: LanguageClientOptions = {
             // Register the server for plain text documents
@@ -110,9 +152,21 @@ class LuaClient extends Disposable {
                 isTrusted: true,
                 supportHtml: true,
             },
+            outputChannel: outputChannel,
             initializationOptions: {
                 changeConfiguration: true,
+                statusBar: true,
+                viewDocument: true,
+                trustByClient: true,
+                useSemanticByRange: true,
+                codeLensViewReferences: true,
+                fixIndents: true,
+                languageConfiguration: true,
+                storagePath: this.context.globalStorageUri.fsPath,
             },
+            middleware: {
+                provideHover: async () => undefined,
+            }
         };
 
         const config = Workspace.getConfiguration(
@@ -136,6 +190,9 @@ class LuaClient extends Disposable {
                   }
                 : undefined,
             args: commandParam,
+            options: {
+                cwd: path.dirname(path.dirname(command)),
+            },
         };
 
         this.client = new LanguageClient(
@@ -144,11 +201,14 @@ class LuaClient extends Disposable {
             serverOptions,
             clientOptions
         );
+        this.disposables.push(this.client);
 
         //client.registerProposedFeatures();
         await this.client.start();
         this.onCommand();
         this.statusBar();
+        this.languageConfiguration();
+        this.provideHover();
     }
 
     private async getCommand(config: vscode.WorkspaceConfiguration) {
@@ -231,14 +291,12 @@ class LuaClient extends Disposable {
     }
 
     async stop() {
-        this.client.stop();
-        for (const disposable of this.disposables) {
-            disposable.dispose();
-        }
+        this.client?.stop();
+        this.dispose();
     }
 
-    statusBar() {
-        const client = this.client;
+    private statusBar() {
+        const client = this.client!;
         const bar = window.createStatusBarItem(vscode.StatusBarAlignment.Right);
         bar.text = "Lua";
         bar.command = "Lua.statusBar";
@@ -267,12 +325,106 @@ class LuaClient extends Disposable {
         this.disposables.push(bar);
     }
 
-    onCommand() {
+    private onCommand() {
+        if (!this.client) {
+            return;
+        }
         this.disposables.push(
             this.client.onNotification("$/command", (params) => {
                 Commands.executeCommand(params.command, params.data);
             })
         );
+    }
+
+    private languageConfiguration() {
+        if (!this.client) {
+            return;
+        }
+
+        function convertStringsToRegex(config: any): any {
+            if (typeof config !== 'object' || config === null) {
+                return config;
+            }
+
+            for (const key in config) {
+                if (config.hasOwnProperty(key)) {
+                    const value = config[key];
+
+                    if (typeof value === 'object' && value !== null) {
+                        convertStringsToRegex(value);
+                    }
+
+                    if (key === 'beforeText' || key === 'afterText') {
+                        if (typeof value === 'string') {
+                            config[key] = new RegExp(value);
+                        }
+                    }
+                }
+            }
+
+            return config;
+        }
+
+        let configuration: Disposable | undefined;
+        this.disposables.push(
+            this.client.onNotification('$/languageConfiguration', (params) => {
+                configuration?.dispose();
+                configuration = vscode.languages.setLanguageConfiguration(params.id, convertStringsToRegex(params.configuration));
+                this.disposables.push(configuration);
+            })
+        )
+    }
+
+    private provideHover() {
+        const client = this.client;
+        const levelMap = new WeakMap<vscode.VerboseHover, number>();
+        let provider = vscode.languages.registerHoverProvider('lua', {
+            provideHover: async (document, position, token, context?: vscode.HoverContext) => {
+                if (!client) {
+                    return null;
+                }
+                let level = 1;
+                if (context?.previousHover) {
+                    level = levelMap.get(context.previousHover) ?? 0;
+                    if (context.verbosityDelta !== undefined) {
+                        level += context.verbosityDelta;
+                    }
+                }
+                let params = {
+                    level: level,
+                    ...client.code2ProtocolConverter.asTextDocumentPositionParams(document, position),
+                }
+                return client?.sendRequest(
+                    LSP.HoverRequest.type,
+                    params,
+                    token,
+                ).then((result) => {
+                    if (token.isCancellationRequested) {
+                        return null;
+                    }
+                    if (result === null) {
+                        return null;
+                    }
+                    let verboseResult = result as LSP.Hover & { maxLevel?: number };
+                    let maxLevel = verboseResult.maxLevel ?? 0;
+                    let hover = client.protocol2CodeConverter.asHover(result);
+                    let verboseHover = new vscode.VerboseHover(
+                        hover.contents,
+                        hover.range,
+                        level < maxLevel,
+                        level > 0,
+                    );
+                    if (level > maxLevel) {
+                        level = maxLevel;
+                    }
+                    levelMap.set(verboseHover, level);
+                    return verboseHover;
+                }, (error) => {
+                    return client.handleFailedRequest(LSP.HoverRequest.type, token, error, null);
+                });
+            }
+        })
+        this.disposables.push(provider)
     }
 }
 
@@ -298,19 +450,25 @@ export function activate(context: ExtensionContext) {
 export async function deactivate() {
     if (defaultClient) {
         defaultClient.stop();
+        defaultClient.dispose();
         defaultClient = null;
+    }
+    // 清理输出通道
+    if (outputChannel) {
+        outputChannel.dispose();
+        outputChannel = undefined;
     }
     return undefined;
 }
-
+vscode.SyntaxTokenType.String
 export async function reportAPIDoc(params: unknown) {
     if (!defaultClient) {
         return;
     }
-    defaultClient.client.sendNotification('$/api/report', params);
+    defaultClient.client?.sendNotification('$/api/report', params);
 }
 
-type ConfigChange = {
+export type ConfigChange = {
     action:  "set",
     key:     string,
     value:   LSPAny,
@@ -346,7 +504,7 @@ export async function setConfig(changes: ConfigChange[]): Promise<boolean> {
             global: change.global,
         });
     }
-    await defaultClient.client.sendRequest(ExecuteCommandRequest.type, {
+    await defaultClient.client?.sendRequest(ExecuteCommandRequest.type, {
         command: 'lua.setConfig',
         arguments: params,
     });
@@ -357,7 +515,7 @@ export async function getConfig(key: string, uri: vscode.Uri): Promise<LSPAny> {
     if (!defaultClient) {
         return undefined;
     }
-    return await defaultClient.client.sendRequest(ExecuteCommandRequest.type, {
+    return await defaultClient.client?.sendRequest(ExecuteCommandRequest.type, {
         command: 'lua.getConfig',
         arguments: [{
             uri: uri.toString(),
