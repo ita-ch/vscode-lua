@@ -3459,7 +3459,7 @@
 	"license": "MIT",
 	"main": "./client/out/src/extension",
 	"name": "lua",
-	"publisher": "sumneko_infotech",
+	"publisher": "sumneko-infotech",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/ita-ch/vscode-lua"
